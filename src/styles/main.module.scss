@@ -1,0 +1,18 @@
+@import './mixins.module.scss';
+
+.container {
+  @include font-style();
+  background-color: $c-almost-black;
+}
+
+.header {
+  height: $header-heigh;
+}
+
+.main {
+  min-height: $main-heigh;
+}
+
+.footer {
+  height: $footer-heigh;
+}
