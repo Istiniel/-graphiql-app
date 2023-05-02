@@ -67,7 +67,7 @@ $main-heigh: calc(100vh - ($header-heigh + $footer-heigh));
 }
 
 @mixin btn-img-style(
-  $image: '../assets/start-btn_ico.svg',
+  $image: '../assets//icons/start-btn_ico.png',
   $size: 70%,
   $position: center,
   $repeat: no-repeat
