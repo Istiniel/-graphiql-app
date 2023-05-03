@@ -1,21 +1,33 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './NavBar.module.scss'
 
 const NavBar = () => {
+  const [isAuth] = useState(false)
+
   return (
     <nav>
       <ul>
-        <li>
-          <Link href="/" className={styles.navLink}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/auth" className={styles.navLink}>
-            Sign in | Sign up
-          </Link>
-        </li>
+        {isAuth && (
+          <li>
+            <Link href="/" className={styles.navLink}>
+              Go to the main Page
+            </Link>
+          </li>
+        )}
+        {!isAuth ? (
+          <li>
+            <Link href="/auth" className={styles.navLink}>
+              Sign in | Sign up
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <Link href="/auth" className={styles.navLink}>
+              Sign out
+            </Link>
+          </li>
+        )}
         <li>
           <Link href="/editor" className={styles.navLink}>
             Editor
