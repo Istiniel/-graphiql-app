@@ -14,24 +14,19 @@
   }
 }
 
-// use for bold text accent
-.span-bold {
-  font-weight: 700;
-}
-
 //input styles
 .invalid {
-  outline: 2px solid rgb(255, 80, 49) !important;
+  outline: 2px solid $c-orange !important;
   outline-offset: -2px;
 }
 
 ::-webkit-scrollbar {
-  background-color: rgb(194, 194, 194);
+  background-color: $c-gray;
   width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $primary-darkgray2;
+  background-color: $c-gray;
 }
 
 .overflow-hidden {

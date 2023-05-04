@@ -1,1 +1,5 @@
 @use '../abstracts/' as *;
+
+.header {
+  height: $header-heigh;
+}

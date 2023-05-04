@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    additionalData: `@use "./styles/abstracts/_index.scss" as *;`,
+    additionalData: `@use "./src/styles/abstracts/_index.scss" as *;`,
   },
 }
 
