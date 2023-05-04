@@ -1,3 +1,5 @@
+@use '../abstracts/' as *;
+
 .btn_start {
   @include button-style($bg-color: $c-pink, $b-radius: 50%, $height: 60px, $width: 60px);
   @include font-style();

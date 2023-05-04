@@ -1,0 +1,43 @@
+@use '../abstracts' as *;
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+.wrapper {
+  width: 100%;
+  max-width: $max-width;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @include maxQ(small) {
+    padding: 0 10px;
+  }
+}
+
+//input styles
+.invalid {
+  outline: 2px solid $c-orange !important;
+  outline-offset: -2px;
+}
+
+::-webkit-scrollbar {
+  background-color: $c-gray;
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $c-gray;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+body,
+#root {
+  min-height: 150vh;
+  margin: 0;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}

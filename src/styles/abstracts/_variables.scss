@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+// fonts
+@font-face {
+  font-family: 'Arial Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Arial Regular'), url('../../assets/fonts/ARIAL.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Source Code Pro'), url('../../assets/fonts/SourceCodePro-Regular.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('../../assets/fonts/Inconsolata-Regular.ttf') format('ttf');
+}
+
+// fonts
+$font-monospace: 'Source Code Pro', 'Inconsolata', monospace !default;
+$font-serif: 'Arial Regular', Arial, Helvetica, sans-serif !default;
+
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$font-size-base: 16px;
+$font-size-heading: 28px;
+$font-size-code: 14px;
+
+// Colors
+$c-white: #ffff;
+$c-gray: #c9d0d4;
+$c-pink: #f0b4d8;
+$c-orange: rgb(255, 80, 49);
+$c-green: #66c05d;
+$c-dark-gray: #22222c;
+$c-bright-purple: #4c37d9;
+$c-dark-blue: #2c295e;
+$c-almost-black: #171721;
+$color-black: #0b141c;
+
+$light-gradient: linear-gradient(90deg, #fdc091 0%, #e197c4 31.81%, #7757c0 71.23%, #4c37d9 100%);
+$dark-gradient: linear-gradient(45.66deg, #22222c 0%, #2c295e 100%);
+
+//breakpoints
+$break-xs: 320px;
+$break-sm: 768px;
+$break-md: 1024px;
+$break-lg: 1280px;
+$break-xl: 1600px;
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
