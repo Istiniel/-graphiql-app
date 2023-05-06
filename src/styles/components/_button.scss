@@ -32,9 +32,4 @@
     background: $c-bright-purple;
     color: $c-white;
   }
-  .navLink {
-    &::after {
-      height: 0;
-    }
-  }
 }
