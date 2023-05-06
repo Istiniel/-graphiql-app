@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  width: 80px;
+  justify-content: space-around;
+}
+
+.navLink {
+  &:hover {
+    color: tomato;
+  }
+  font-family: $font-serif;
+  font-size: 25px;
+}
+
+.active {
+  color: blue;
+}
