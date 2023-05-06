@@ -4,6 +4,8 @@ import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const query = `query Library {
   books {
@@ -37,11 +39,15 @@ const response = `{
 const welcomeText = `This app makes it easy to interact with the API and get the data you need. With GraphQL, you can precisely specify what data you want, making your queries more efficient and reducing the amount of data sent over the wire. Try our app now and start building amazing things with GraphQL!`
 
 export default function WelcomePage() {
+  const { t } = useTranslation('common')
+
   return (
     <>
       <Meta title="Welcome" description="GraphQL editor" />
       <Layout>
         <main className={`${styles.main} ${styles.welcomePage}`}>
+          <div className={styles.description}>
+          <h1>{t('welcome')}</h1>
           <div className={styles.welcomeInfo}>
             <h1>Welcome to our GraphQL-powered app!</h1>
             <span>{welcomeText}</span>
@@ -62,4 +68,12 @@ export default function WelcomePage() {
       </Layout>
     </>
   )
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  }
 }

@@ -1,6 +1,9 @@
-import '@/styles/App.scss'
 import type { AppProps } from 'next/app'
+import { appWithTranslation } from 'next-i18next'
+import '@/styles/App.scss'
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
 }
+
+export default appWithTranslation(App)
