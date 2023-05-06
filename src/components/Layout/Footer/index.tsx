@@ -23,7 +23,9 @@ const Footer = () => {
         </li>
       </ul>
       <small>Created in 2023</small>
-      <div className={styles.rsLogo}>RS School</div>
+      <Link href="https://rs.school/react/">
+        <div className={styles.rsLogo}></div>
+      </Link>
     </footer>
   )
 }

@@ -14,6 +14,9 @@
 }
 
 .logo {
+  @include bg-img-style($image: '../../assets/icons/gq-logo_ico.png', $size: contain);
+  height: 40px;
+  width: 150px;
   .navLink {
     &::after {
       height: 0;

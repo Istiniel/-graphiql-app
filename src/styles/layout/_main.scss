@@ -1,10 +1,6 @@
 @use '../abstracts/' as *;
 @use '../components/' as *;
 
-.app {
-  @include bg-img-style($image: '../../assets/images/welcome-page-bg.png');
-}
-
 .main {
   @include font-style($color: $c-white);
   padding: 50px;

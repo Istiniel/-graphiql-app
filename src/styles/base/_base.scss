@@ -37,9 +37,9 @@
 
 body,
 #root {
-  min-height: 150vh;
+  @include bg-img-style($image: '../../assets/images/welcome-page-bg.png');
+  min-height: 100vh;
   margin: 0;
-
   display: grid;
   grid-template-rows: auto 1fr auto;
 }

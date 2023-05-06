@@ -7,11 +7,9 @@ const NavBar = () => {
 
   return (
     <nav className={styles.navBar}>
-      <div className={styles.logo}>
-        <Link href="/" className={styles.navLink}>
-          Logo
-        </Link>
-      </div>
+      <Link href="/">
+        <div className={styles.logo}></div>
+      </Link>
       <ul>
         {isAuth && (
           <li>
@@ -34,11 +32,9 @@ const NavBar = () => {
         </li>
       ) : (
         <li>
-          <button className={styles.navBtn}>
-            <Link href="/auth" className={styles.navLink}>
-              Sign out
-            </Link>
-          </button>
+          <Link href="/auth">
+            <button className={styles.navBtn}>Sign out</button>
+          </Link>
         </li>
       )}
     </nav>

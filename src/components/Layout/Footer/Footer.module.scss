@@ -1,2 +1,15 @@
 @use '../../../styles/layout/footer' as *;
 @use '../../../styles/components/nav' as *;
+
+.ghLogo {
+  @include bg-img-style($image: '../../assets/icons/gh-logo_ico.png');
+  width: 20px;
+  height: 20px;
+}
+
+.rsLogo {
+  @include bg-img-style($image: '../../assets/icons/rs-logo_ico.png', $size: contain);
+  height: 40px;
+  width: 150px;
+  cursor: pointer;
+}
