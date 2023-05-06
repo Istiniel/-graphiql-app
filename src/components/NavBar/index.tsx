@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next'
 import styles from './NavBar.module.scss'
 
 const NavBar = () => {
   const [isAuth] = useState(false)
+  const { t } = useTranslation('common')
 
   return (
     <nav>
@@ -30,7 +32,7 @@ const NavBar = () => {
         )}
         <li>
           <Link href="/editor" className={styles.navLink}>
-            Editor
+            {t('editor')}
           </Link>
         </li>
       </ul>
