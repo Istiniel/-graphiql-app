@@ -3,28 +3,20 @@ import React, { useState } from 'react'
 import styles from './NavBar.module.scss'
 
 const NavBar = () => {
-  const [isAuth] = useState(false)
+  const [isAuth] = useState(true)
 
   return (
-    <nav>
+    <nav className={styles.navBar}>
+      <div className={styles.logo}>
+        <Link href="/" className={styles.navLink}>
+          Logo
+        </Link>
+      </div>
       <ul>
         {isAuth && (
           <li>
             <Link href="/" className={styles.navLink}>
               Go to the main Page
-            </Link>
-          </li>
-        )}
-        {!isAuth ? (
-          <li>
-            <Link href="/auth" className={styles.navLink}>
-              Sign in | Sign up
-            </Link>
-          </li>
-        ) : (
-          <li>
-            <Link href="/auth" className={styles.navLink}>
-              Sign out
             </Link>
           </li>
         )}
@@ -34,6 +26,21 @@ const NavBar = () => {
           </Link>
         </li>
       </ul>
+      {!isAuth ? (
+        <li>
+          <Link href="/auth" className={styles.navLink}>
+            Sign in | Sign up
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <button className={styles.navBtn}>
+            <Link href="/auth" className={styles.navLink}>
+              Sign out
+            </Link>
+          </button>
+        </li>
+      )}
     </nav>
   )
 }

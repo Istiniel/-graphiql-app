@@ -11,6 +11,11 @@
   flex-direction: column;
 }
 
+%aligncenter {
+  display: flex;
+  align-items: center;
+}
+
 // Example
 // div {
 //   @extend %transition;

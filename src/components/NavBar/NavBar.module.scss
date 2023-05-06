@@ -1,7 +1,46 @@
-.navLink {
-  &:hover {
-    color: tomato;
+@use '../../styles/components/button' as *;
+
+.navBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  * {
+    @extend %aligncenter;
   }
-  font-family: $font-serif;
-  font-size: 25px;
+
+  ul {
+    gap: 50px;
+  }
+}
+
+.navLink {
+  @include font-style($family: $font-serif, $size: 20px, $color: $c-white);
+  position: relative;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: $c-white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.navBtn,
+.logo {
+  .navLink {
+    &::after {
+      height: 0;
+    }
+  }
 }

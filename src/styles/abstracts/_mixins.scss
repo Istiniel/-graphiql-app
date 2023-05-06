@@ -1,10 +1,12 @@
+@use './variables' as *;
+
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
 
 // Font-styles
 
-@mixin font-style($family: $main-font, $size: $font-size-base, $color: $c-gray, $weight: 400) {
+@mixin font-style($family: $font-serif, $size: $font-size-base, $color: $c-gray, $weight: 400) {
   font-family: $family;
   font-size: $size;
   font-weight: $weight;
@@ -21,11 +23,11 @@
   background-color: $bg-color;
   height: $height;
   width: $width;
-  padding: 5px 10px;
+  padding: 8px 10px;
   border: none;
   border-radius: $b-radius;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: $fast-transition;
 
   &:hover {
     background-color: lighten($bg-color, 10%);
@@ -42,7 +44,7 @@
 }
 
 @mixin btn-img-style(
-  $image: '../assets//icons/start-btn_ico.png',
+  $image: '../../assets/icons/start-btn_ico.png',
   $size: 70%,
   $position: center,
   $repeat: no-repeat
