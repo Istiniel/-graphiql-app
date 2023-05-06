@@ -20,6 +20,7 @@
 
 .navBtn {
   @include button-style();
+  @include font-style($family: $font-serif, $size: 20px, $color: $c-white);
   background: $c-bright-purple;
   box-sizing: border-box;
   &:hover {

@@ -16,6 +16,11 @@
   align-items: center;
 }
 
+%spacebetween {
+  display: flex;
+  justify-content: space-between;
+}
+
 // Example
 // div {
 //   @extend %transition;

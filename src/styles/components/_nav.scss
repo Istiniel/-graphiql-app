@@ -1,0 +1,23 @@
+@use '../abstracts/' as *;
+
+.navLink {
+  position: relative;
+  text-decoration: none;
+  @extend %aligncenter;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: $c-white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
