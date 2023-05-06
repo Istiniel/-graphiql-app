@@ -2,8 +2,8 @@ import styles from '../styles/Main.module.scss'
 import Link from 'next/link'
 import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+// import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
@@ -57,12 +57,8 @@ export default function WelcomePage() {
             </div>
             <div className={styles.codeExample}>
               <span className="codeTitle">Code example:</span>
-              <SyntaxHighlighter language="graphql" style={coldarkDark}>
-                {query}
-              </SyntaxHighlighter>
-              <SyntaxHighlighter language="graphql" style={coldarkDark}>
-                {response}
-              </SyntaxHighlighter>
+              <SyntaxHighlighter language="graphql">{query}</SyntaxHighlighter>
+              <SyntaxHighlighter language="graphql">{response}</SyntaxHighlighter>
             </div>
           </div>
         </main>
