@@ -47,22 +47,23 @@ export default function WelcomePage() {
       <Layout>
         <main className={`${styles.main} ${styles.welcomePage}`}>
           <div className={styles.description}>
-          <h1>{t('welcome')}</h1>
-          <div className={styles.welcomeInfo}>
-            <h1>Welcome to our GraphQL-powered app!</h1>
-            <span>{welcomeText}</span>
-            <Link href="/auth">
-              <button className={styles.navBtn}>Get started</button>
-            </Link>
-          </div>
-          <div className={styles.codeExample}>
-            <span className="codeTitle">Code example:</span>
-            <SyntaxHighlighter language="graphql" style={coldarkDark}>
-              {query}
-            </SyntaxHighlighter>
-            <SyntaxHighlighter language="graphql" style={coldarkDark}>
-              {response}
-            </SyntaxHighlighter>
+            <h1>{t('welcome')}</h1>
+            <div className={styles.welcomeInfo}>
+              <h1>Welcome to our GraphQL-powered app!</h1>
+              <span>{welcomeText}</span>
+              <Link href="/auth">
+                <button className={styles.navBtn}>Get started</button>
+              </Link>
+            </div>
+            <div className={styles.codeExample}>
+              <span className="codeTitle">Code example:</span>
+              <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                {query}
+              </SyntaxHighlighter>
+              <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                {response}
+              </SyntaxHighlighter>
+            </div>
           </div>
         </main>
       </Layout>

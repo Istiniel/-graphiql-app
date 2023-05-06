@@ -7,7 +7,6 @@ const NavBar = () => {
   const [isAuth] = useState(false)
   const { t } = useTranslation('common')
 
-
   return (
     <nav className={styles.navBar}>
       <Link href="/">
