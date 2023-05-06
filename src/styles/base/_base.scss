@@ -21,12 +21,14 @@
 }
 
 ::-webkit-scrollbar {
-  background-color: $c-gray;
-  width: 3px;
+  background-color: transparent;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $c-gray;
+  background-color: $c-white-transparent;
+  border-radius: 3px;
 }
 
 .overflow-hidden {

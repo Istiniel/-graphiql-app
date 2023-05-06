@@ -3,13 +3,13 @@
 .btnStart {
   @include button-style($bg-color: $c-pink, $b-radius: 50%, $height: 60px, $width: 60px);
   @include font-style();
-  @include btn-img-style();
+  @include bg-img-style($size: 70%);
 }
 
 .btnStop {
   @include button-style($bg-color: $c-bright-purple, $b-radius: 50%, $height: 60px, $width: 60px);
   @include font-style();
-  @include btn-img-style($image: '../../assets/icons/stop-btn_ico.png');
+  @include bg-img-style($image: '../../assets/icons/stop-btn_ico.png', $size: 70%);
 }
 
 .btnVariables,
@@ -27,5 +27,14 @@
     background: transparent;
     color: $c-bright-purple;
     box-shadow: inset 0 0 0 3px $c-bright-purple;
+  }
+  &:active {
+    background: $c-bright-purple;
+    color: $c-white;
+  }
+  .navLink {
+    &::after {
+      height: 0;
+    }
   }
 }

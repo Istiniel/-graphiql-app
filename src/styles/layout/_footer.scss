@@ -1,19 +1,22 @@
 @use '../abstracts/' as *;
 
 .footer {
-  @include font-style($family: $font-serif, $size: $font-size-base, $color: $c-white);
+  @include font-style();
   @extend %aligncenter;
   @extend %spacebetween;
-  background: $dark-gradient;
+  @include glass-effect();
   padding: 20px 50px;
   li {
     margin: 5px 0;
   }
+  a {
+    display: flex;
+    gap: 10px;
+  }
 }
 
 .ghLogo {
-  background-image: url('../../assets/icons/gh-logo_ico.png');
+  @include bg-img-style($image: '../../assets/icons/gh-logo_ico.png');
   width: 20px;
   height: 20px;
-  background-size: contain;
 }

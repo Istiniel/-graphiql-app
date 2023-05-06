@@ -32,9 +32,12 @@ $font-weight-normal: 400;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-$font-size-base: 16px;
-$font-size-heading: 28px;
 $font-size-code: 14px;
+$font-size-base: 16px;
+$font-size-medium: 20px;
+$font-size-heading: 28px;
+
+$b-radius: 5px;
 
 // Colors
 $c-white: #ffff;
@@ -46,7 +49,9 @@ $c-dark-gray: #22222c;
 $c-bright-purple: #4c37d9;
 $c-dark-blue: #2c295e;
 $c-almost-black: #171721;
-$color-black: #0b141c;
+$c-black: #0b141c;
+$c-dark-transparent: #1717216e;
+$c-white-transparent: rgba(255, 255, 255, 0.4);
 
 $light-gradient: linear-gradient(90deg, #fdc091 0%, #e197c4 31.81%, #7757c0 71.23%, #4c37d9 100%);
 $dark-gradient: linear-gradient(45.66deg, #22222c 0%, #2c295e 100%);
