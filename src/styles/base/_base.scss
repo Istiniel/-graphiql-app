@@ -21,12 +21,14 @@
 }
 
 ::-webkit-scrollbar {
-  background-color: $c-gray;
-  width: 3px;
+  background-color: transparent;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $c-gray;
+  background-color: $c-white-transparent;
+  border-radius: 3px;
 }
 
 .overflow-hidden {
@@ -35,9 +37,9 @@
 
 body,
 #root {
-  min-height: 150vh;
+  @include bg-img-style($image: '../../assets/images/welcome-page-bg.png');
+  min-height: 100vh;
   margin: 0;
-
   display: grid;
   grid-template-rows: auto 1fr auto;
 }

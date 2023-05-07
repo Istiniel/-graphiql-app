@@ -1,0 +1,34 @@
+@use '../abstracts/' as *;
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the home page.
+// -----------------------------------------------------------------------------
+
+.welcomePage {
+  @include grid();
+  align-items: center;
+  h1 {
+    @include font-style($size: 35px, $weight: 800);
+  }
+}
+
+.welcomeInfo {
+  @extend %flexcolumn;
+  @include animation-slide();
+  gap: 20px;
+}
+
+.codeExample {
+  @include grid($rows: 2, $col-size: auto, $gap: 10px);
+  @include glass-effect();
+  @include animation-slide($name: slide-up, $start: 100px);
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid $c-white-transparent;
+  border-radius: $b-radius;
+}
+
+.codeTitle {
+  grid-area: 1 / 1 / 1 / span 2;
+  font-size: 20px;
+  justify-self: center;
+}

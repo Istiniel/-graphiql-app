@@ -1,5 +1,7 @@
 @use '../abstracts/' as *;
+@use '../components/' as *;
 
 .main {
-  min-height: $main-heigh;
+  @include font-style($color: $c-white);
+  padding: 50px;
 }
