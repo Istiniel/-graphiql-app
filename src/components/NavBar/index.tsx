@@ -1,12 +1,17 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next'
 import styles from './NavBar.module.scss'
 
 const NavBar = () => {
   const [isAuth] = useState(false)
+  const { t } = useTranslation('common')
 
   return (
-    <nav>
+    <nav className={styles.navBar}>
+      <Link href="/">
+        <div className={styles.logo}></div>
+      </Link>
       <ul>
         {isAuth && (
           <li>
@@ -15,25 +20,25 @@ const NavBar = () => {
             </Link>
           </li>
         )}
-        {!isAuth ? (
-          <li>
-            <Link href="/auth" className={styles.navLink}>
-              Sign in | Sign up
-            </Link>
-          </li>
-        ) : (
-          <li>
-            <Link href="/auth" className={styles.navLink}>
-              Sign out
-            </Link>
-          </li>
-        )}
         <li>
           <Link href="/editor" className={styles.navLink}>
-            Editor
+            {t('editor')}
           </Link>
         </li>
       </ul>
+      {!isAuth ? (
+        <li>
+          <Link href="/auth" className={styles.navLink}>
+            Sign in | Sign up
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <Link href="/auth">
+            <button className={styles.navBtn}>Sign out</button>
+          </Link>
+        </li>
+      )}
     </nav>
   )
 }

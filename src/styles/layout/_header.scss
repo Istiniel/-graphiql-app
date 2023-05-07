@@ -1,0 +1,20 @@
+@use '../abstracts/' as *;
+
+.header {
+  @include font-style($size: $font-size-medium);
+  @include glass-effect();
+  position: sticky;
+  top: 0;
+  display: flex;
+  z-index: 10;
+  width: 100%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  transition: $slow-transition;
+  padding: 20px 50px;
+}
+
+.header.sticky {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background: $dark-gradient;
+  padding: 10px 50px;
+}

@@ -1,0 +1,45 @@
+@use '../abstracts' as *;
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+.wrapper {
+  width: 100%;
+  max-width: $max-width;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @include maxQ(small) {
+    padding: 0 10px;
+  }
+}
+
+//input styles
+.invalid {
+  outline: 2px solid $c-orange !important;
+  outline-offset: -2px;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $c-white-transparent;
+  border-radius: 3px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+body,
+#root {
+  @include bg-img-style($image: '../../assets/images/welcome-page-bg.png');
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}

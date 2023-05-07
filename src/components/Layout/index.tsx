@@ -1,5 +1,8 @@
 import React, { ReactNode } from 'react'
-import NavBar from '../NavBar'
+import Header from './Header'
+import Footer from './Footer'
+import LocaleSelect from '../LocaleSelect'
+
 // import dynamic from 'next/dynamic'
 // const MediaQuery = dynamic(() => import('react-responsive'), {
 //   ssr: false,import NavBar from './../NavBar/index';
@@ -11,14 +14,15 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <>
+    <div>
       {/* <MediaQuery minWidth={1025}>
         <Header />
       </MediaQuery> */}
-
-      <NavBar />
+      <Header />
+      <LocaleSelect />
       {children}
-    </>
+      <Footer />
+    </div>
   )
 }
 

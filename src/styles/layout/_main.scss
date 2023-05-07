@@ -1,0 +1,7 @@
+@use '../abstracts/' as *;
+@use '../components/' as *;
+
+.main {
+  @include font-style($color: $c-white);
+  padding: 50px;
+}

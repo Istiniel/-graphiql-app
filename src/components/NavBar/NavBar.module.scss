@@ -1,5 +1,20 @@
-.navLink {
-  &:hover {
-    color: tomato;
+@use '../../styles/components/' as *;
+
+.navBar {
+  width: 100%;
+  @extend %spacebetween;
+
+  * {
+    @extend %aligncenter;
   }
+
+  ul {
+    gap: 50px;
+  }
+}
+
+.logo {
+  @include bg-img-style($image: '../../assets/icons/gq-logo_ico.png', $size: contain);
+  height: 40px;
+  width: 150px;
 }
