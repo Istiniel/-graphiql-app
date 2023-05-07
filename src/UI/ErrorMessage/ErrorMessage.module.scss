@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  color: #ff542e;
+  font-family: $font-serif;
+  @include font($font-size-base, 120%, $font-weight-semibold);
+  word-wrap: break-word;
+
+  .errorMessage {
+    margin-left: 8px;
+  }
+}

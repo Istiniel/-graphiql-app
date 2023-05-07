@@ -1,0 +1,24 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.authSection {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+
+  & > div {
+    margin-top: 2rem;
+  }
+}
+
+.heading {
+  font-family: $font-serif;
+  @include font($font-size-heading, 120%, $font-weight-bold);
+
+  @include animation-slide($name: slide-up, $start: 20px);
+}

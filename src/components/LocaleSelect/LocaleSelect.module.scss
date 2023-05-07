@@ -2,6 +2,8 @@
   height: max-content;
   display: flex;
   justify-content: space-around;
+
+  color: white;
 }
 
 .navLink {
@@ -20,5 +22,5 @@
 }
 
 .active {
-  color: blue;
+  color: $c-green;
 }

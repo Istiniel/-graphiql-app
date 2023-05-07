@@ -1,0 +1,117 @@
+.form {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  & * {
+    @include onHover() {
+      cursor: pointer;
+    }
+  }
+
+  &.active * {
+    @include onHover() {
+      cursor: text;
+    }
+  }
+}
+
+.searchBar {
+  width: 100%;
+
+  background-color: $c-white;
+  flex: 0 1 20%;
+  min-width: 15rem;
+
+  padding: 1.8rem 4rem 0.2rem 1.2rem;
+  border-radius: 0.8rem;
+
+  font-family: $font-serif;
+  @include font(1.3rem, 2rem, 600);
+  color: $c-bright-purple;
+
+  @include maxQ(medium) {
+    @include font(1.2rem, 130%, 500);
+  }
+
+  &:focus {
+    outline: none;
+
+    & ~ .placeholder {
+      top: 0.2rem;
+      transform: translateY(0%);
+      @include font(1.3rem, 2rem, 700);
+
+      @include maxQ(medium) {
+        @include font(1.2rem, 130%, 500);
+      }
+    }
+  }
+}
+
+.label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.placeholder {
+  position: absolute;
+  pointer-events: none;
+
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-family: $font-serif;
+  @include font(1.5rem, 2rem, 700);
+  color: rgba($color: #555248, $alpha: 0.56);
+
+  transition: all ease-out 0.25s;
+
+  &.inputFilled {
+    top: 0.2rem;
+    transform: translateY(0%);
+    @include font(1.3rem, 2rem, 700);
+
+    @include maxQ(medium) {
+      @include font(1.2rem, 130%, 500);
+    }
+  }
+}
+
+.iconContainer {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: rgba($color: #555248, $alpha: 0.56);
+  width: 4rem;
+  height: 100%;
+
+  display: grid;
+  align-items: center;
+  justify-items: center;
+
+  &.active {
+    @include onHover() {
+      cursor: pointer !important;
+
+      & .icon {
+        color: $c-bright-purple;
+      }
+    }
+  }
+}
+
+.invalid {
+  .placeholder {
+    color: #ff8469;
+  }
+  input {
+    color: #ff542e;
+    background-color: #fff3f0 !important;
+  }
+}

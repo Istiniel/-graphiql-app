@@ -54,8 +54,8 @@ export default function WelcomePage() {
                 <div className={styles.welcomeInfo}>
                   <h1>{t('welcome')} to our GraphQL-powered app!</h1>
                   <span>{welcomeText}</span>
-                  <Link href="/auth">
-                    <button className={styles.navBtn}>Get started</button>
+                  <Link href="/auth" className={styles.navBtn}>
+                    Get started
                   </Link>
                 </div>
                 <div className={styles.codeExample}>

@@ -23,12 +23,13 @@
   $bg-color: $c-gray,
   $height: fit-content,
   $width: fit-content,
-  $b-radius: $b-radius
+  $b-radius: $b-radius,
+  $padding: 8px 10px
 ) {
   background-color: $bg-color;
   height: $height;
   width: $width;
-  padding: 8px 10px;
+  padding: $padding;
   border: none;
   border-radius: $b-radius;
   cursor: pointer;
@@ -45,6 +46,8 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
   }
 }
 
