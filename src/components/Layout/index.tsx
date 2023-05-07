@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import LocaleSelect from '../LocaleSelect'
 
 // import dynamic from 'next/dynamic'
 // const MediaQuery = dynamic(() => import('react-responsive'), {
@@ -14,15 +13,14 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
+    <>
       {/* <MediaQuery minWidth={1025}>
         <Header />
       </MediaQuery> */}
       <Header />
-      <LocaleSelect />
       {children}
       <Footer />
-    </div>
+    </>
   )
 }
 

@@ -1,0 +1,50 @@
+.about {
+  @include font-style($color: $c-white);
+}
+
+.container {
+  padding: 3rem 0;
+  @include grid();
+  align-items: center;
+  h1 {
+    @include font-style($size: 35px, $weight: 800);
+  }
+}
+
+.welcomeInfo {
+  @extend %flexcolumn;
+  @include animation-slide();
+  gap: 20px;
+}
+
+.codeExample {
+  @include grid($rows: 2, $col-size: auto, $gap: 10px);
+  @include glass-effect();
+  @include animation-slide($name: slide-up, $start: 100px);
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid $c-white-transparent;
+  border-radius: $b-radius;
+}
+
+.codeTitle {
+  grid-area: 1 / 1 / 1 / span 2;
+  font-size: 20px;
+  justify-self: center;
+}
+
+.navBtn {
+  @include button-style();
+  @include font-style($family: $font-serif, $size: 20px, $color: $c-white);
+  background: $c-bright-purple;
+  box-sizing: border-box;
+  &:hover {
+    background: transparent;
+    color: $c-bright-purple;
+    box-shadow: inset 0 0 0 3px $c-bright-purple;
+  }
+  &:active {
+    background: $c-bright-purple;
+    color: $c-white;
+  }
+}

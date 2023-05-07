@@ -22,7 +22,11 @@ const Header = () => {
 
   return (
     <header className={`${styles.header} ${sticky ? styles.sticky : ''}`}>
-      <NavBar />
+      <div className="wrapper">
+        <div className={styles.container}>
+          <NavBar />
+        </div>
+      </div>
     </header>
   )
 }

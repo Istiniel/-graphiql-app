@@ -1,5 +1,3 @@
-@use '../../styles/components/' as *;
-
 .navBar {
   width: 100%;
   @extend %spacebetween;
@@ -11,6 +9,14 @@
   ul {
     gap: 50px;
   }
+}
+
+.navLink {
+  position: relative;
+  text-decoration: none;
+  @extend %aligncenter;
+
+  @include bottomline_expand(white);
 }
 
 .logo {

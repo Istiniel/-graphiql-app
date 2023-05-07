@@ -1,5 +1,32 @@
-@use '../../../styles/layout/footer' as *;
-@use '../../../styles/components/nav' as *;
+.footer {
+  @include font-style();
+
+  @include glass-effect();
+
+  li {
+    margin: 5px 0;
+  }
+
+  a {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.container {
+  padding: 2rem 0;
+  display: flex;
+  @extend %aligncenter;
+  @extend %spacebetween;
+}
+
+.navLink {
+  position: relative;
+  text-decoration: none;
+  @extend %aligncenter;
+
+  @include bottomline_expand(white);
+}
 
 .ghLogo {
   @include bg-img-style($image: '../../assets/icons/gh-logo_ico.png');

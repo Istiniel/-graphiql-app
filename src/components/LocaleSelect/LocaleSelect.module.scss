@@ -1,10 +1,17 @@
 .container {
+  height: max-content;
   display: flex;
-  width: 80px;
   justify-content: space-around;
 }
 
 .navLink {
+  padding: 1rem 0;
+  display: inline-block;
+
+  &:not(:last-of-type) {
+    margin-right: 1rem;
+  }
+
   &:hover {
     color: tomato;
   }
