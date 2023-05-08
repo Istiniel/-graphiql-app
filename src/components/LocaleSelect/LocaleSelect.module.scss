@@ -1,17 +1,24 @@
 .container {
+  height: max-content;
   display: flex;
-  width: 80px;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-around;
+  gap: 0.5rem;
+
+  color: white;
 }
 
 .navLink {
+  display: inline-block;
+
   &:hover {
     color: tomato;
   }
   font-family: $font-serif;
-  font-size: 25px;
+  font-size: 16px;
 }
 
 .active {
-  color: blue;
+  color: $c-green;
 }

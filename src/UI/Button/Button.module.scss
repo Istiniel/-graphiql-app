@@ -1,0 +1,17 @@
+.primary {
+  @include button-style($padding: 1rem 2rem);
+  @include font-style($family: $font-serif, $size: 20px, $color: $c-white);
+  background: $c-bright-purple;
+  box-sizing: border-box;
+
+  @include onHover() {
+    background: transparent;
+    color: $c-bright-purple;
+    box-shadow: inset 0 0 0 3px $c-bright-purple;
+  }
+
+  &:active {
+    background: $c-bright-purple;
+    color: $c-white;
+  }
+}

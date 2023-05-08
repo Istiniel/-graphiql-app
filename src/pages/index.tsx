@@ -1,4 +1,4 @@
-import styles from '../styles/Main.module.scss'
+import styles from './MainPage.module.scss'
 import Link from 'next/link'
 import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
@@ -6,6 +6,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 // import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Wrapper from '@/components/Wrapper'
 
 const query = `query Library {
   books {
@@ -36,8 +37,6 @@ const response = `{
 }
 `
 
-const welcomeText = `This app makes it easy to interact with the API and get the data you need. With GraphQL, you can precisely specify what data you want, making your queries more efficient and reducing the amount of data sent over the wire. Try our app now and start building amazing things with GraphQL!`
-
 export default function WelcomePage() {
   const { t } = useTranslation('common')
 
@@ -45,22 +44,25 @@ export default function WelcomePage() {
     <>
       <Meta title="Welcome" description="GraphQL editor" />
       <Layout>
-        <main className={`${styles.main} ${styles.welcomePage}`}>
-          <div className={styles.description}>
-            <h1>{t('welcome')}</h1>
-            <div className={styles.welcomeInfo}>
-              <h1>Welcome to our GraphQL-powered app!</h1>
-              <span>{welcomeText}</span>
-              <Link href="/auth">
-                <button className={styles.navBtn}>Get started</button>
-              </Link>
-            </div>
-            <div className={styles.codeExample}>
-              <span className="codeTitle">Code example:</span>
-              <SyntaxHighlighter language="graphql">{query}</SyntaxHighlighter>
-              <SyntaxHighlighter language="graphql">{response}</SyntaxHighlighter>
-            </div>
-          </div>
+        <main className={styles.main}>
+          <section className={styles.about}>
+            <Wrapper>
+              <div className={styles.container}>
+                <div className={styles.welcomeInfo}>
+                  <h1>{t('aboutTitle')}</h1>
+                  <span>{t('aboutParagraph')}</span>
+                  <Link href="/auth" className={styles.navBtn}>
+                    {t('getstarted')}
+                  </Link>
+                </div>
+                <div className={styles.codeExample}>
+                  <span className={styles.codeTitle}>{t('codeExample')}</span>
+                  <SyntaxHighlighter language="graphql">{query}</SyntaxHighlighter>
+                  <SyntaxHighlighter language="graphql">{response}</SyntaxHighlighter>
+                </div>
+              </div>
+            </Wrapper>
+          </section>
         </main>
       </Layout>
     </>

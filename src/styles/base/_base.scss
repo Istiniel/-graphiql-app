@@ -4,6 +4,7 @@
 // -----------------------------------------------------------------------------
 
 .wrapper {
+  height: 100%;
   width: 100%;
   max-width: $max-width;
   padding: 0 20px;
@@ -36,7 +37,8 @@
 }
 
 body,
-#root {
+#root,
+#__next {
   @include bg-img-style($image: '../../assets/images/welcome-page-bg.png');
   min-height: 100vh;
   margin: 0;

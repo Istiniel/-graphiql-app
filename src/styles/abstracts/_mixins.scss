@@ -23,12 +23,13 @@
   $bg-color: $c-gray,
   $height: fit-content,
   $width: fit-content,
-  $b-radius: $b-radius
+  $b-radius: $b-radius,
+  $padding: 8px 10px
 ) {
   background-color: $bg-color;
   height: $height;
   width: $width;
-  padding: 8px 10px;
+  padding: $padding;
   border: none;
   border-radius: $b-radius;
   cursor: pointer;
@@ -45,6 +46,8 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
   }
 }
 
@@ -143,23 +146,39 @@
   }
 }
 
-/// Event wrapper
-// @param {Bool} $self [false] - Whether or not to include current selector
-// @mixin onHover($self: false) {
-//   @if $self {
-//     &,
-//     &:hover,
-//     &:active,
-//     &:focus,
-//     &:focus-within {
-//       @content;
-//     }
-//   } @else {
-//     &:hover,
-//     &:active,
-//     &:focus,
-//     &:focus-within {
-//       @content;
-//     }
-//   }
-// }
+@mixin bottomline_expand($color: white) {
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: $color;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@mixin onHover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  &:active {
+    @content;
+  }
+}
+
+// Font-styles
+@mixin font($size, $height: $size, $weight: 400) {
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+}
