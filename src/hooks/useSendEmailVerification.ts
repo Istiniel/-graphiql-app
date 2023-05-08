@@ -9,10 +9,10 @@ export type SendEmailVerificationHook = [
 
 const useSendEmailVerification = (auth: Auth): SendEmailVerificationHook => {
   const [error, setError] = useState<AuthError>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const sendEmailVerification = useCallback(async () => {
-    setLoading(true)
+    setIsLoading(true)
     setError(undefined)
     try {
       if (auth.currentUser) {
@@ -25,11 +25,11 @@ const useSendEmailVerification = (auth: Auth): SendEmailVerificationHook => {
       setError(err as AuthError)
       return false
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }, [auth])
 
-  return [sendEmailVerification, loading, error]
+  return [sendEmailVerification, isLoading, error]
 }
 
 export default useSendEmailVerification

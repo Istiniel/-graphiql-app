@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from './AuthForm.module.scss'
 import classNames from 'classnames'
-// import { BsGoogle } from 'react-icons/bs'
 import { AiOutlineGithub } from 'react-icons/ai'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
@@ -48,7 +47,7 @@ const AuthForm = () => {
               .then((result) => {
                 const user = result.user
                 dispatch(setUser(user))
-                router.push('/')
+                router.push('/editor')
               })
               .catch((error) => {
                 console.log(error)

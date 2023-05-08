@@ -15,6 +15,18 @@ interface FormUpValues {
   confirmpass: string
 }
 
+export interface AdditionalValue {
+  message: string
+  value: number | string
+}
+
+const MIN_PASS = 8
+
+const messagesWithValue = {
+  message: 'min',
+  value: MIN_PASS,
+}
+
 const SignInForm = () => {
   const router = useRouter()
   const [signUpError, setSignUpError] = useState<string>('')
@@ -55,9 +67,12 @@ const SignInForm = () => {
         type="email"
         rules={{
           required: 'noemail',
+          minLength: {
+            value: messagesWithValue.value,
+            message: messagesWithValue.message,
+          },
           pattern: {
-            value:
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            value: /^[^\s@]+@[^\s@]+.[^\s@]+$/,
             message: 'wrongEmail',
           },
         }}
@@ -69,8 +84,8 @@ const SignInForm = () => {
         rules={{
           required: 'nopass',
           minLength: {
-            value: 8,
-            message: 'min',
+            value: messagesWithValue.value,
+            message: messagesWithValue.message,
           },
           pattern: {
             value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -85,8 +100,8 @@ const SignInForm = () => {
         rules={{
           required: 'repeatPassword',
           minLength: {
-            value: 8,
-            message: 'min',
+            value: messagesWithValue.value,
+            message: messagesWithValue.message,
           },
           pattern: {
             value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -104,11 +119,20 @@ const SignInForm = () => {
       <Button primaryText={t('up')} disabled={!isValid} type="submit" />
       <aside className={styles.errors}>
         <AuthErrorMessage isVisible={!!signUpError} message={`${signUpError}`} />
-        <AuthErrorMessage isVisible={!!errors.email} message={`${errors.email?.message}`} />
-        <AuthErrorMessage isVisible={!!errors.password} message={`${errors.password?.message}`} />
+        <AuthErrorMessage
+          isVisible={!!errors.email}
+          message={`${errors.email?.message}`}
+          additionalMessage={messagesWithValue}
+        />
+        <AuthErrorMessage
+          isVisible={!!errors.password}
+          message={`${errors.password?.message}`}
+          additionalMessage={messagesWithValue}
+        />
         <AuthErrorMessage
           isVisible={!!errors.confirmpass}
           message={`${errors.confirmpass?.message}`}
+          additionalMessage={messagesWithValue}
         />
       </aside>
     </form>

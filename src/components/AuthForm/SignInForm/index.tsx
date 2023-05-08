@@ -13,7 +13,7 @@ export interface FormInValues {
   password: string
 }
 
-const MIN_PASS = 5
+const MIN_PASS = 8
 
 export interface AdditionalValue {
   message: string
@@ -62,9 +62,12 @@ const SignInForm = () => {
         type="email"
         rules={{
           required: 'noemail',
+          minLength: {
+            value: messagesWithValue.value,
+            message: messagesWithValue.message,
+          },
           pattern: {
-            value:
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            value: /^[^\s@]+@[^\s@]+.[^\s@]+$/,
             message: 'wrongEmail',
           },
         }}
@@ -88,7 +91,11 @@ const SignInForm = () => {
       <Button primaryText={t('in')} disabled={!isValid} type="submit" />
       <aside className={styles.errors}>
         <AuthErrorMessage isVisible={!!signinError} message={`${signinError}`} />
-        <AuthErrorMessage isVisible={!!errors.email} message={`${errors.email?.message}`} />
+        <AuthErrorMessage
+          isVisible={!!errors.email}
+          message={`${errors.email?.message}`}
+          additionalMessage={messagesWithValue}
+        />
         <AuthErrorMessage
           isVisible={!!errors.password}
           message={`${errors.password?.message}`}
