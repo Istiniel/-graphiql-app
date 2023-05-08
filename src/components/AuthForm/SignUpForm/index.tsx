@@ -1,15 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './SignUpForm.module.scss'
 import Button from '@/UI/Button'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import AuthInput from '../AuthInput'
 import AuthErrorMessage from '../AuthErrorMessage'
 import { useTranslation } from 'next-i18next'
+import { auth, signUp } from '@/firebase/clientApp'
+import { useRouter } from 'next/router'
+import useSendEmailVerification from '@/hooks/useSendEmailVerification'
+
+interface FormUpValues {
+  email: string
+  password: string
+  confirmpass: string
+}
 
 const SignInForm = () => {
-  const onSubmit = (data: object) => {
-    console.log(JSON.stringify(data))
-    reset()
+  const router = useRouter()
+  const [signUpError, setSignUpError] = useState<string>('')
+  const [sendEmailVerification, ,] = useSendEmailVerification(auth)
+
+  const onSubmit: SubmitHandler<FormUpValues> = async (data) => {
+    const { email, password } = data
+    const { error } = await signUp(email, password)
+    await sendEmailVerification()
+
+    if (error) {
+      setSignUpError('Ошибка регистрации')
+      return
+    } else {
+      reset()
+      router.push('/editor')
+    }
   }
 
   const {
@@ -18,7 +40,7 @@ const SignInForm = () => {
     watch,
     control,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<FormUpValues>({
     mode: 'onChange',
   })
 
@@ -27,23 +49,7 @@ const SignInForm = () => {
 
   return (
     <form action="#" className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-      <AuthInput
-        control={control}
-        name="login"
-        type="login"
-        rules={{
-          required: 'nologinl',
-          pattern: {
-            value: /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{0,19}$/,
-            message: 'wrongInput',
-          },
-          minLength: {
-            value: 5,
-            message: 'min',
-          },
-        }}
-      />
-      <AuthInput
+      <AuthInput<FormUpValues>
         control={control}
         name="email"
         type="email"
@@ -56,29 +62,37 @@ const SignInForm = () => {
           },
         }}
       />
-      <AuthInput
+      <AuthInput<FormUpValues>
         control={control}
         name="password"
         type="password"
         rules={{
           required: 'nopass',
           minLength: {
-            value: 5,
+            value: 8,
             message: 'min',
+          },
+          pattern: {
+            value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            message: 'wrongPass',
           },
         }}
       />
-      <AuthInput
+      <AuthInput<FormUpValues>
         control={control}
         name="confirmpass"
         type="password"
         rules={{
           required: 'repeatPassword',
           minLength: {
-            value: 5,
+            value: 8,
             message: 'min',
           },
-          validate: (value: string) => {
+          pattern: {
+            value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            message: 'wrongPass',
+          },
+          validate: (value) => {
             if (value === password) {
               return true
             } else {
@@ -89,7 +103,7 @@ const SignInForm = () => {
       />
       <Button primaryText={t('up')} disabled={!isValid} type="submit" />
       <aside className={styles.errors}>
-        <AuthErrorMessage isVisible={!!errors.login} message={`${errors.login?.message}`} />
+        <AuthErrorMessage isVisible={!!signUpError} message={`${signUpError}`} />
         <AuthErrorMessage isVisible={!!errors.email} message={`${errors.email?.message}`} />
         <AuthErrorMessage isVisible={!!errors.password} message={`${errors.password?.message}`} />
         <AuthErrorMessage

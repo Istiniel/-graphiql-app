@@ -1,9 +1,14 @@
 import React from 'react'
 
 import st from './Spinner.module.scss'
+import classNames from 'classnames'
 
-const Spinner = () => {
-  return <div className={st.container}></div>
+type SpinnerProps = {
+  isSmall?: boolean
+}
+
+const Spinner: React.FC<SpinnerProps> = ({ isSmall = false }) => {
+  return <div className={classNames({ [st.small]: isSmall }, st.container)}></div>
 }
 
 export default Spinner

@@ -46,18 +46,12 @@ const AuthForm = () => {
           onClick={() =>
             signInWithPopup(auth, provider)
               .then((result) => {
-                // const credential = GithubAuthProvider.credentialFromResult(result)
-                // const token = credential.accessToken
                 const user = result.user
                 dispatch(setUser(user))
-                router.push('/editor')
+                router.push('/')
               })
               .catch((error) => {
                 console.log(error)
-                // const errorCode = error.code
-                // const errorMessage = error.message
-                // const email = error.customData.email
-                // const credential = GithubAuthProvider.credentialFromError(error)
               })
           }
         />
