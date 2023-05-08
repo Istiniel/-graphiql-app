@@ -30,14 +30,14 @@ const SignInForm = () => {
         name="login"
         type="text"
         rules={{
-          required: 'Не указан логин',
+          required: 'nologin',
           pattern: {
             value: /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{0,19}$/,
-            message: 'Недопустимые символы',
+            message: 'wrongInput',
           },
           minLength: {
             value: 5,
-            message: 'Минимум 5 символов',
+            message: 'min',
           },
         }}
       />
@@ -46,14 +46,14 @@ const SignInForm = () => {
         name="password"
         type="password"
         rules={{
-          required: t('nopass') as string,
+          required: 'nopass',
           minLength: {
             value: 5,
-            message: 'Минимум 5 символов',
+            message: 'min',
           },
         }}
       />
-      <Button primaryText="Sing In" disabled={!isValid} />
+      <Button primaryText={t('in')} disabled={!isValid} type="submit" />
       <aside className={styles.errors}>
         <AuthErrorMessage isVisible={!!errors.login} message={`${errors.login?.message}`} />
         <AuthErrorMessage isVisible={!!errors.password} message={`${errors.password?.message}`} />

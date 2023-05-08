@@ -23,7 +23,6 @@ const SignInForm = () => {
   })
 
   const password = watch('password')
-
   const { t } = useTranslation('auth')
 
   return (
@@ -33,14 +32,14 @@ const SignInForm = () => {
         name="login"
         type="login"
         rules={{
-          required: 'Не указан логин',
+          required: 'nologinl',
           pattern: {
             value: /^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{0,19}$/,
-            message: 'Недопустимые символы',
+            message: 'wrongInput',
           },
           minLength: {
             value: 5,
-            message: 'Минимум 5 символов',
+            message: 'min',
           },
         }}
       />
@@ -49,11 +48,11 @@ const SignInForm = () => {
         name="email"
         type="email"
         rules={{
-          required: 'Не указан e-mail',
+          required: 'noemail',
           pattern: {
             value:
               /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            message: 'Неправильно указан e-mail.',
+            message: 'wrongEmail',
           },
         }}
       />
@@ -62,40 +61,40 @@ const SignInForm = () => {
         name="password"
         type="password"
         rules={{
-          required: t('nopass') as string,
+          required: 'nopass',
           minLength: {
             value: 5,
-            message: 'Минимум 5 символов',
+            message: 'min',
           },
         }}
       />
       <AuthInput
         control={control}
-        name="confirm password"
+        name="confirmpass"
         type="password"
         rules={{
-          required: 'Введите пароль снова',
+          required: 'repeatPassword',
           minLength: {
             value: 5,
-            message: 'Минимум 5 символов',
+            message: 'min',
           },
           validate: (value: string) => {
             if (value === password) {
               return true
             } else {
-              return 'Пароли не совпадают.'
+              return 'passwordNotMatch'
             }
           },
         }}
       />
-      <Button primaryText="Sing Up" disabled={!isValid} />
+      <Button primaryText={t('up')} disabled={!isValid} type="submit" />
       <aside className={styles.errors}>
         <AuthErrorMessage isVisible={!!errors.login} message={`${errors.login?.message}`} />
         <AuthErrorMessage isVisible={!!errors.email} message={`${errors.email?.message}`} />
         <AuthErrorMessage isVisible={!!errors.password} message={`${errors.password?.message}`} />
         <AuthErrorMessage
-          isVisible={!!errors['confirm password']}
-          message={`${errors['confirm password']?.message}`}
+          isVisible={!!errors.confirmpass}
+          message={`${errors.confirmpass?.message}`}
         />
       </aside>
     </form>

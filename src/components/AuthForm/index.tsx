@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
 import styles from './AuthForm.module.scss'
 import classNames from 'classnames'
-import { BsGoogle } from 'react-icons/bs'
+// import { BsGoogle } from 'react-icons/bs'
 import { AiOutlineGithub } from 'react-icons/ai'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 import { useTranslation } from 'next-i18next'
+import { useAppDispatch } from '@/redux/hooks'
+
+import { auth } from '@/firebase/clientApp'
+import { GithubAuthProvider, signInWithPopup } from 'firebase/auth'
+import { useRouter } from 'next/router'
+import { setUser } from '../../redux/features/AuthSlice/AuthSlice'
+
+const provider = new GithubAuthProvider()
 
 const AuthForm = () => {
+  const dispatch = useAppDispatch()
+
   const [formType, setFormType] = useState<'in' | 'up'>('in')
   const { t } = useTranslation('auth')
+  const router = useRouter()
 
   return (
     <div className={styles.container}>
@@ -30,8 +41,26 @@ const AuthForm = () => {
       </h2>
       {formType === 'in' ? <SignInForm /> : <SignUpForm />}
       <div className={styles.oauthContainer}>
-        <BsGoogle className={styles.social} />
-        <AiOutlineGithub className={styles.social} />
+        <AiOutlineGithub
+          className={styles.social}
+          onClick={() =>
+            signInWithPopup(auth, provider)
+              .then((result) => {
+                // const credential = GithubAuthProvider.credentialFromResult(result)
+                // const token = credential.accessToken
+                const user = result.user
+                dispatch(setUser(user))
+                router.push('/editor')
+              })
+              .catch((error) => {
+                console.log(error)
+                // const errorCode = error.code
+                // const errorMessage = error.message
+                // const email = error.customData.email
+                // const credential = GithubAuthProvider.credentialFromError(error)
+              })
+          }
+        />
       </div>
     </div>
   )

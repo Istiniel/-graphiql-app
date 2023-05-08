@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
 import styles from './Footer.module.scss'
+import { useTranslation } from 'next-i18next'
 
 const Footer = () => {
+  const { t } = useTranslation('common')
+
   return (
     <footer className={styles.footer}>
       <div className="wrapper">
@@ -24,7 +27,7 @@ const Footer = () => {
               </Link>
             </li>
           </ul>
-          <small>Created in 2023</small>
+          <small>{t('createdIn')}</small>
           <Link href="https://rs.school/react/">
             <div className={styles.rsLogo}></div>
           </Link>

@@ -1,11 +1,19 @@
+.main {
+  height: 100%;
+  display: grid;
+  place-items: center center;
+}
+
 .about {
+  height: 100%;
   @include font-style($color: $c-white);
 }
 
 .container {
+  height: 100%;
   padding: 3rem 0;
   @include grid();
-  align-items: center;
+  place-items: center center;
   h1 {
     @include font-style($size: 35px, $weight: 800);
   }

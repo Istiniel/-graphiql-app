@@ -1,6 +1,7 @@
 import React, { HTMLInputTypeAttribute, useState } from 'react'
 import styles from './Input.module.scss'
 import classNames from 'classnames'
+import { useTranslation } from 'next-i18next'
 
 export interface InputProps {
   placeholder: string
@@ -21,6 +22,8 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false)
 
+  const { t } = useTranslation('auth')
+
   return (
     <div
       className={classNames(
@@ -38,7 +41,7 @@ const Input: React.FC<InputProps> = ({
           type={type}
         />
         <span className={classNames({ [styles.inputFilled]: value }, styles.placeholder)}>
-          {placeholder}
+          {t(placeholder.toLowerCase())}
         </span>
       </label>
       {aside && <div className={styles.iconContainer}>{aside}</div>}

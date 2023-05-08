@@ -1,0 +1,10 @@
+.container {
+  height: 100%;
+  display: grid;
+  place-items: center center;
+}
+
+.heading {
+  @include font-style($color: $c-white);
+  @include font-style($size: 35px, $weight: 800);
+}

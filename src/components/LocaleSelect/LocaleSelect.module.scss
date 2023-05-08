@@ -1,24 +1,22 @@
 .container {
   height: max-content;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-around;
+  gap: 0.5rem;
 
   color: white;
 }
 
 .navLink {
-  padding: 1rem 0;
   display: inline-block;
-
-  &:not(:last-of-type) {
-    margin-right: 1rem;
-  }
 
   &:hover {
     color: tomato;
   }
   font-family: $font-serif;
-  font-size: 25px;
+  font-size: 16px;
 }
 
 .active {
