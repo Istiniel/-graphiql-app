@@ -13,6 +13,18 @@ export interface FormInValues {
   password: string
 }
 
+const MIN_PASS = 5
+
+export interface AdditionalValue {
+  message: string
+  value: number | string
+}
+
+const messagesWithValue = {
+  message: 'min',
+  value: MIN_PASS,
+}
+
 const SignInForm = () => {
   const router = useRouter()
   const [signinError, setSigninError] = useState<string>('')
@@ -64,8 +76,8 @@ const SignInForm = () => {
         rules={{
           required: 'nopass',
           minLength: {
-            value: 5,
-            message: 'min',
+            value: messagesWithValue.value,
+            message: messagesWithValue.message,
           },
           pattern: {
             value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -77,7 +89,11 @@ const SignInForm = () => {
       <aside className={styles.errors}>
         <AuthErrorMessage isVisible={!!signinError} message={`${signinError}`} />
         <AuthErrorMessage isVisible={!!errors.email} message={`${errors.email?.message}`} />
-        <AuthErrorMessage isVisible={!!errors.password} message={`${errors.password?.message}`} />
+        <AuthErrorMessage
+          isVisible={!!errors.password}
+          message={`${errors.password?.message}`}
+          additionalMessage={messagesWithValue}
+        />
       </aside>
     </form>
   )
