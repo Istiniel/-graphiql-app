@@ -10,7 +10,7 @@ import { auth } from '@/firebase/clientApp'
 import useAuth from '@/hooks/useAuth'
 import { useAppDispatch } from '@/redux/hooks'
 import { setUser } from '@/redux/features/AuthSlice/AuthSlice'
-import Spinner from '@/UI/Spinner'
+import classNames from 'classnames'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +19,12 @@ const NavBar = () => {
   const { t } = useTranslation('common')
 
   return (
-    <nav className={styles.navBar}>
+    <nav
+      className={classNames(
+        { [styles.loading]: isLoading, [styles.loaded]: !isLoading },
+        styles.navBar,
+      )}
+    >
       <Link href="/">
         <div className={styles.logo}></div>
       </Link>
@@ -43,9 +48,7 @@ const NavBar = () => {
           </li>
         )}
 
-        {!user && isLoading ? (
-          <Spinner isSmall />
-        ) : !user ? (
+        {!user ? (
           <li>
             <Link href="/auth" className={styles.navLink}>
               {`${t('in')} / ${t('up')}`}
