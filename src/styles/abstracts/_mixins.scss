@@ -13,10 +13,13 @@
   color: $color;
 }
 
-@mixin block-style($bg: $dark-gradient, $b-radius: 15px) {
+@mixin block-style($bg: $c-almost-black, $b-radius: 5px) {
+  display: flex;
   background: $bg;
   border-radius: $b-radius;
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid $c-white-transparent;
+  height: 100%;
+  width: 100%;
 }
 
 @mixin button-style(
@@ -26,6 +29,7 @@
   $b-radius: $b-radius,
   $padding: 8px 10px
 ) {
+  box-sizing: border-box;
   background-color: $bg-color;
   height: $height;
   width: $width;

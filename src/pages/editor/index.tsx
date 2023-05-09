@@ -7,12 +7,17 @@ import Wrapper from '@/components/Wrapper'
 import { useAppSelector } from '@/redux/hooks'
 import { selectUser } from '@/redux/features/AuthSlice/AuthSlice'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import classNames from 'classnames'
+import { StartButton, SwitchButton } from '@/UI/EditorButtons'
 
 export default function EditorPage() {
   const router = useRouter()
   const user = useAppSelector(selectUser)
-  const { t: translation } = useTranslation('editor')
+  const { t } = useTranslation('editor')
+  const [isSelected, setIsSelected] = useState(false)
+  const [isStart, setIsStart] = useState(true)
+  const [isDocsOpen, setIsDocsOpen] = useState(false)
 
   useEffect(() => {
     if (!user) {
@@ -28,7 +33,44 @@ export default function EditorPage() {
           {user && (
             <Wrapper>
               <div className={styles.container}>
-                <h1>{translation('h1')}</h1>
+                <div className={styles.docs}>
+                  <button className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
+                    {t('docs')}
+                  </button>
+                  {isDocsOpen && (
+                    <div className={classNames(styles.section, styles.docsSection)}>
+                      Documentation
+                    </div>
+                  )}
+                </div>
+                <div className={styles.block}>
+                  <div className={styles.section}></div>
+                  <div className={classNames(styles.section, styles.headersSection)}>
+                    <div className={styles.btnSection}>
+                      <SwitchButton
+                        onClickHandler={() => setIsSelected(!isSelected)}
+                        isSelected={isSelected}
+                        primaryText={t('variables')}
+                      />
+                      <SwitchButton
+                        onClickHandler={() => setIsSelected(!isSelected)}
+                        isSelected={!isSelected}
+                        primaryText={t('headers')}
+                      />
+                    </div>
+                    {isSelected ? (
+                      <div className={styles.headers}>{t('headers')}</div>
+                    ) : (
+                      <div className={styles.variables}>{t('variables')}</div>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.btnBlock}>
+                  <StartButton onClickHandler={() => setIsStart(!isStart)} isStart={isStart} />
+                </div>
+                <div className={styles.block}>
+                  <div className={styles.section}></div>
+                </div>
               </div>
             </Wrapper>
           )}
