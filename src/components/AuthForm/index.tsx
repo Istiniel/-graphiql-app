@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from './AuthForm.module.scss'
 import classNames from 'classnames'
-// import { BsGoogle } from 'react-icons/bs'
 import { AiOutlineGithub } from 'react-icons/ai'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
@@ -46,18 +45,12 @@ const AuthForm = () => {
           onClick={() =>
             signInWithPopup(auth, provider)
               .then((result) => {
-                // const credential = GithubAuthProvider.credentialFromResult(result)
-                // const token = credential.accessToken
                 const user = result.user
                 dispatch(setUser(user))
                 router.push('/editor')
               })
               .catch((error) => {
                 console.log(error)
-                // const errorCode = error.code
-                // const errorMessage = error.message
-                // const email = error.customData.email
-                // const credential = GithubAuthProvider.credentialFromError(error)
               })
           }
         />

@@ -1,27 +1,28 @@
 import React, { HTMLInputTypeAttribute } from 'react'
-import { Control, Controller, FieldValues, RegisterOptions } from 'react-hook-form'
+import { Control, Controller, FieldValues, Path, RegisterOptions } from 'react-hook-form'
 import styles from './AuthInput.module.scss'
 import Input from '@/UI/Input'
 
-type AuthInputProps = {
-  name: string
+interface AuthInputProps<T extends FieldValues> {
+  name: Path<T>
   type?: HTMLInputTypeAttribute
   rules:
-    | Omit<
-        RegisterOptions<FieldValues, string>,
-        'setValueAs' | 'disabled' | 'valueAsNumber' | 'valueAsDate'
-      >
+    | Omit<RegisterOptions<T, Path<T>>, 'setValueAs' | 'disabled' | 'valueAsNumber' | 'valueAsDate'>
     | undefined
-  control: Control
+  control: Control<T>
 }
 
-const AuthInput: React.FC<AuthInputProps> = ({ name, type, control, rules }) => {
+function AuthInput<T extends FieldValues>({
+  name,
+  type,
+  control,
+  rules,
+}: React.PropsWithChildren<AuthInputProps<T>>) {
   return (
     <div className={styles.input}>
       <Controller
         control={control}
         name={name}
-        defaultValue={''}
         rules={rules}
         render={({ field: { onChange, value }, fieldState: { invalid } }) => (
           <Input

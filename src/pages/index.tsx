@@ -7,6 +7,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Wrapper from '@/components/Wrapper'
+import { auth } from '../firebase/clientApp'
+import { GetStaticProps, NextPage } from 'next'
 
 const query = `query Library {
   books {
@@ -36,8 +38,10 @@ const response = `{
   }
 }
 `
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface WelcomePageProps {}
 
-export default function WelcomePage() {
+const WelcomePage: NextPage<WelcomePageProps> = () => {
   const { t } = useTranslation('common')
 
   return (
@@ -69,10 +73,15 @@ export default function WelcomePage() {
   )
 }
 
-export async function getStaticProps({ locale }: { locale: string }) {
+export default WelcomePage
+
+export const getStaticProps: GetStaticProps<WelcomePageProps> = async (context) => {
+  const user = auth.currentUser
+
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      user,
+      ...(await serverSideTranslations(context.locale as string, ['auth', 'common'])),
     },
   }
 }

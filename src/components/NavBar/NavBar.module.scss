@@ -40,3 +40,13 @@
   padding: 0 2rem;
   flex: 1 0 auto;
 }
+
+.loading {
+  opacity: 0;
+  transition: opacity ease-out 0.3s;
+}
+
+.loaded {
+  opacity: 1;
+  transition: opacity ease-out 0.3s;
+}

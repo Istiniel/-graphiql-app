@@ -5,11 +5,24 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import AuthForm from '@/components/AuthForm/index'
 import Wrapper from '@/components/Wrapper'
 import { GetStaticProps, NextPage } from 'next'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@/redux/hooks'
+import { selectUser } from '@/redux/features/AuthSlice/AuthSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AuthPageProps {}
 
 const AuthPage: NextPage<AuthPageProps> = () => {
+  const user = useAppSelector(selectUser)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user, router])
+
   return (
     <>
       <Meta title="Auth" description="GraphQL editor" />
