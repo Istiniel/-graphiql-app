@@ -7,7 +7,7 @@ export interface InputProps {
   placeholder: string
   aside?: React.ReactNode
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  value: string
+  value: string | number
   invalid?: boolean
   type?: HTMLInputTypeAttribute
 }

@@ -55,4 +55,13 @@
     background: $c-bright-purple;
     color: $c-white;
   }
+
+.loading {
+  opacity: 0;
+  transition: opacity ease-out 0.3s;
+}
+
+.loaded {
+  opacity: 1;
+  transition: opacity ease-out 0.3s;
 }

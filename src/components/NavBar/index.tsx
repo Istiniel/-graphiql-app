@@ -4,19 +4,27 @@ import { useTranslation } from 'next-i18next'
 import styles from './NavBar.module.scss'
 import LocaleSelect from '../LocaleSelect'
 import capitalizeWord from '@/helpers/capitalizeWord'
-import { selectUser, setUser } from '@/redux/features/AuthSlice/AuthSlice'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase/clientApp'
+import useAuth from '@/hooks/useAuth'
+import { useAppDispatch } from '@/redux/hooks'
+import { setUser } from '@/redux/features/AuthSlice/AuthSlice'
+import classNames from 'classnames'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
-  const user = useAppSelector(selectUser)
+  const { user, isLoading } = useAuth()
+
   const { t } = useTranslation('common')
 
   return (
-    <nav className={styles.navBar}>
+    <nav
+      className={classNames(
+        { [styles.loading]: isLoading, [styles.loaded]: !isLoading },
+        styles.navBar,
+      )}
+    >
       <Link href="/">
         <div className={styles.logo}></div>
       </Link>
@@ -30,15 +38,8 @@ const NavBar = () => {
       <ul className={styles.navList}>
         {user && (
           <li>
-            <Link href="/" className={styles.navLink}>
-              {capitalizeWord(t('gotomain'))}
-            </Link>
-          </li>
-        )}
-        {user && (
-          <li>
             <Link href="/editor" className={styles.navLink}>
-              {capitalizeWord(t('editor'))}
+              {capitalizeWord(t('gotomain'))}
             </Link>
           </li>
         )}
@@ -46,7 +47,7 @@ const NavBar = () => {
         {!user ? (
           <li>
             <Link href="/auth" className={styles.navBtn}>
-              {t('in')}
+              {`${t('in')} / ${t('up')}`}
             </Link>
           </li>
         ) : (
