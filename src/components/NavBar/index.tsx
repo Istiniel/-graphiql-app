@@ -28,10 +28,6 @@ const NavBar = () => {
       <Link href="/">
         <div className={styles.logo}></div>
       </Link>
-      <div className={styles.languageContainer}>
-        <LocaleSelect />
-      </div>
-
       {user && (
         <div className={styles.welcomeContainer}>
           <h2>
@@ -50,7 +46,7 @@ const NavBar = () => {
 
         {!user ? (
           <li>
-            <Link href="/auth" className={styles.navLink}>
+            <Link href="/auth" className={styles.navBtn}>
               {`${t('in')} / ${t('up')}`}
             </Link>
           </li>
@@ -58,7 +54,7 @@ const NavBar = () => {
           <li>
             <Link
               href="/auth"
-              className={styles.navLink}
+              className={styles.navBtn}
               onClick={() => {
                 signOut(auth)
                 dispatch(setUser(null))
@@ -69,6 +65,9 @@ const NavBar = () => {
           </li>
         )}
       </ul>
+      <div className={styles.languageContainer}>
+        <LocaleSelect />
+      </div>
     </nav>
   )
 }

@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  height: 100%;
+  width: 100%;
+}
+
+.block {
+  @include block-style();
+  @include animation-slide();
+  flex-direction: column;
+}
+
+.section {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.btnBlock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.btnSection {
+  display: flex;
+  gap: 10px;
+}
+
+.headersSection {
+  border-top: 1px solid $c-white-transparent;
+}
+
+.docs {
+  display: flex;
+  gap: 10px;
+}
+
+.docsSection {
+  background-color: $c-gray;
+  border-radius: 5px;
+}
+
+.docsBtn {
+  @include button-style();
+}
