@@ -46,7 +46,7 @@ const NavBar = () => {
 
         {!user ? (
           <li>
-            <Link href="/auth" className={styles.navBtn}>
+            <Link href="/auth" className={styles.navLink}>
               {`${t('in')} / ${t('up')}`}
             </Link>
           </li>

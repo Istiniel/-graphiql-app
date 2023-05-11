@@ -5,10 +5,6 @@
   * {
     @extend %aligncenter;
   }
-
-  ul {
-    gap: 50px;
-  }
 }
 
 .navList {
@@ -33,7 +29,6 @@
 
 .languageContainer {
   margin-left: 2rem;
-  margin-right: auto;
 }
 
 .welcomeContainer {
