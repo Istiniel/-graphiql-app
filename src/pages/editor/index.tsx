@@ -34,14 +34,14 @@ export default function EditorPage() {
             <Wrapper>
               <div className={styles.container}>
                 <div className={styles.docs}>
-                  <button className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
-                    {t('docs')}
-                  </button>
                   {isDocsOpen && (
                     <div className={classNames(styles.section, styles.docsSection)}>
                       Documentation
                     </div>
                   )}
+                  <div className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
+                    {t('docs')}
+                  </div>
                 </div>
                 <div className={styles.block}>
                   <div className={styles.section}></div>
