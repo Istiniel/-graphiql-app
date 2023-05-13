@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-// import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Wrapper from '@/components/Wrapper'
@@ -61,8 +61,12 @@ const WelcomePage: NextPage<WelcomePageProps> = () => {
                 </div>
                 <div className={styles.codeExample}>
                   <span className={styles.codeTitle}>{t('codeExample')}</span>
-                  <SyntaxHighlighter language="graphql">{query}</SyntaxHighlighter>
-                  <SyntaxHighlighter language="graphql">{response}</SyntaxHighlighter>
+                  <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                    {query}
+                  </SyntaxHighlighter>
+                  <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                    {response}
+                  </SyntaxHighlighter>
                 </div>
               </div>
             </Wrapper>
