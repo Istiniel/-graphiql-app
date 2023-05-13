@@ -7,19 +7,77 @@ import Wrapper from '@/components/Wrapper'
 import { useAppSelector } from '@/redux/hooks'
 import { selectUser } from '@/redux/features/AuthSlice/AuthSlice'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { StartButton, SwitchButton } from '@/UI/EditorButtons'
+import { useDispatch } from 'react-redux'
+import {
+  getGqlValueThunk,
+  selectEditorData,
+  selectQuery,
+  setQuery,
+} from '@/redux/features/AuthSlice/EditorSlice'
+import { AppDispatch } from '@/redux/store'
+
+const QueryField = () => {
+  const query = useAppSelector(selectQuery)
+
+  const dispatch = useDispatch()
+
+  const handleTextFieldChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const query = e.target.value
+
+      dispatch(setQuery(query))
+    },
+    [dispatch],
+  )
+
+  return <textarea value={query} onChange={handleTextFieldChange} />
+}
+
+const Results = () => {
+  const data = useAppSelector(selectEditorData)
+
+  return (
+    <>
+      {data &&
+        Object.keys(data)?.map((k) => {
+          const results = (data?.[k] as unknown as { results: Array<{ name: string }> })?.results
+
+          if (results?.length) {
+            return results.map((r) => {
+              const { name } = r
+
+              return <p key={name}>{name}</p>
+            })
+          }
+          return <></>
+        })}
+    </>
+  )
+}
 
 export default function EditorPage() {
   const router = useRouter()
   const user = useAppSelector(selectUser)
+  const query = useAppSelector(selectQuery)
   const { t } = useTranslation('editor')
   const [isSelected, setIsSelected] = useState(false)
   const [isStart, setIsStart] = useState(true)
   const [isDocsOpen, setIsDocsOpen] = useState(false)
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleStartClick = useCallback(() => {
+    setIsStart((prev) => !prev)
+
+    if (query === null || typeof query !== 'string') return
+
+    dispatch(getGqlValueThunk(query))
+  }, [dispatch, query])
 
   useEffect(() => {
+    //TODO correct redirection
     if (!user) {
       router.push('/')
     }
@@ -44,7 +102,9 @@ export default function EditorPage() {
                   )}
                 </div>
                 <div className={styles.block}>
-                  <div className={styles.section}></div>
+                  <div className={styles.section}>
+                    <QueryField />
+                  </div>
                   <div className={classNames(styles.section, styles.headersSection)}>
                     <div className={styles.btnSection}>
                       <SwitchButton
@@ -66,10 +126,12 @@ export default function EditorPage() {
                   </div>
                 </div>
                 <div className={styles.btnBlock}>
-                  <StartButton onClickHandler={() => setIsStart(!isStart)} isStart={isStart} />
+                  <StartButton onClickHandler={handleStartClick} isStart={isStart} />
                 </div>
                 <div className={styles.block}>
-                  <div className={styles.section}></div>
+                  <div className={styles.section}>
+                    <Results />
+                  </div>
                 </div>
               </div>
             </Wrapper>

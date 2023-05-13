@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
 import AuthSlice from './features/AuthSlice/AuthSlice'
 import { createWrapper } from 'next-redux-wrapper'
+import EditorSlice from './features/AuthSlice/EditorSlice'
 
 const rootReducer = combineReducers({
   authSlice: AuthSlice,
+  editorSlice: EditorSlice,
 })
 
 export function setupStore() {
