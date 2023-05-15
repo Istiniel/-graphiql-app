@@ -61,8 +61,10 @@ const WelcomePage: NextPage<WelcomePageProps> = () => {
                 </div>
                 <div className={styles.codeExample}>
                   <span className={styles.codeTitle}>{t('codeExample')}</span>
-                  <SyntaxHighlighter language="graphql">{query}</SyntaxHighlighter>
-                  <SyntaxHighlighter language="graphql">{response}</SyntaxHighlighter>
+                  <div className={styles.codeContainer}>
+                    <SyntaxHighlighter language="graphql">{query}</SyntaxHighlighter>
+                    <SyntaxHighlighter language="graphql">{response}</SyntaxHighlighter>
+                  </div>
                 </div>
               </div>
             </Wrapper>

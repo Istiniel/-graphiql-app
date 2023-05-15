@@ -1,10 +1,16 @@
 .switchBtn {
   @include button-style($bg-color: $c-almost-black);
   @include font-style($color: $c-gray);
+  @include maxQ(small) {
+    font-size: 14px;
+  }
 }
 
 .select {
   @include button-style($bg-color: $c-dark-gray);
+  @include maxQ(small) {
+    font-size: 14px;
+  }
 }
 
 .btnStart,
@@ -12,14 +18,25 @@
   position: absolute;
   z-index: 5;
   top: 20px;
+  @include maxQ(small) {
+    top: -20px;
+  }
 }
 
 .btnStart {
   @include button-style($bg-color: $c-green, $b-radius: 50%, $height: 60px, $width: 60px);
   @include bg-img-style($size: 70%);
+  @include maxQ(small) {
+    height: 45px;
+    width: 45px;
+  }
 }
 
 .btnStop {
   @include button-style($bg-color: $c-bright-purple, $b-radius: 50%, $height: 60px, $width: 60px);
   @include bg-img-style($image: '../../assets/icons/stop-btn_ico.png', $size: 70%);
+  @include maxQ(small) {
+    height: 45px;
+    width: 45px;
+  }
 }
