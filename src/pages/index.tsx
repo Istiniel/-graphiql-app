@@ -23,12 +23,6 @@ const response = `{
   "data": {
     "books": [
       {
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
-        "genre": "Fiction",
-        "publishedYear": 1960
-      },
-      {
         "title": "1984",
         "author": "George Orwell",
         "genre": "Fiction",

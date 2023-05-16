@@ -38,7 +38,7 @@
 .codeExample,
 .codeContainer {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .codeExample {
@@ -54,13 +54,25 @@
 .codeTitle {
   font-size: 20px;
   justify-self: center;
+  @include maxQ(small) {
+    font-size: $font-size-base;
+  }
 }
 
 .codeContainer {
   @include maxQ(medium) {
     font-size: $font-size-small;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 880px) {
+    flex-direction: column;
+  }
+  @include maxQ(small) {
+    flex-direction: row;
+  }
+  @media (max-width: 510px) {
+    pre {
+      width: 250px;
+    }
     flex-direction: column;
   }
 }
