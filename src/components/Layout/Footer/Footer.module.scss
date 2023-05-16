@@ -10,6 +10,15 @@
   a {
     display: flex;
     gap: 10px;
+    @include maxQ(small) {
+      font-size: 14px;
+    }
+  }
+
+  small {
+    @include maxQ(small) {
+      display: none;
+    }
   }
 }
 
@@ -39,4 +48,7 @@
   height: 40px;
   width: 150px;
   cursor: pointer;
+  @include maxQ(medium) {
+    width: 120px;
+  }
 }

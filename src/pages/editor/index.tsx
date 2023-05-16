@@ -34,9 +34,9 @@ export default function EditorPage() {
             <Wrapper>
               <div className={styles.container}>
                 <div className={styles.docs}>
-                  <button className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
+                  <div className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
                     {t('docs')}
-                  </button>
+                  </div>
                   {isDocsOpen && (
                     <div className={classNames(styles.section, styles.docsSection)}>
                       Documentation

@@ -1,15 +1,23 @@
 .container {
+  position: relative;
   display: flex;
   gap: 10px;
   padding: 10px 0;
   height: 100%;
   width: 100%;
+  @include maxQ(small) {
+    flex-direction: column;
+    gap: 5px;
+  }
 }
 
 .block {
   @include block-style();
   @include animation-slide();
   flex-direction: column;
+  @include maxQ(small) {
+    min-height: 400px;
+  }
 }
 
 .section {
@@ -34,14 +42,29 @@
 
 .docs {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  z-index: 5;
+  position: absolute;
+  right: -40px;
+  top: 0;
+  height: 100%;
+  @include maxQ(small) {
+    right: -10px;
+  }
 }
 
 .docsSection {
+  height: 100%;
   background-color: $c-gray;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
 }
 
 .docsBtn {
   @include button-style();
+  @include font-style($color: $c-black, $size: 14px);
+  border-radius: 5px 0 0 5px;
+  writing-mode: vertical-rl;
+  @include maxQ(small) {
+    font-size: 12px;
+  }
 }
