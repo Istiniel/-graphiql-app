@@ -7,108 +7,14 @@ import Wrapper from '@/components/Wrapper'
 import { useAppSelector } from '@/redux/hooks'
 import { selectUser } from '@/redux/features/AuthSlice/AuthSlice'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { StartButton, SwitchButton } from '@/UI/EditorButtons'
 import { useDispatch } from 'react-redux'
-import {
-  getGqlValueThunk,
-  selectEditorData,
-  selectQuery,
-  setQuery,
-} from '@/redux/features/AuthSlice/EditorSlice'
+import { getGqlValueThunk, selectQuery } from '@/redux/features/AuthSlice/EditorSlice'
 import { AppDispatch } from '@/redux/store'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-
-const QueryField = () => {
-  const query = useAppSelector(selectQuery)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
-
-  const dispatch = useDispatch()
-
-  const handleTextFieldChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const query = e.target.value
-
-      dispatch(setQuery(query))
-    },
-    [dispatch],
-  )
-
-  // return <textarea value={query} onChange={handleTextFieldChange} />
-  // return <SyntaxHighlighter language="graphql" onChange={handleTextFieldChange}>{query}</SyntaxHighlighter>
-
-  return (
-    <div
-      role="button"
-      tabIndex={0}
-      onKeyDown={() => textareaRef.current?.focus()}
-      onClick={() => textareaRef.current?.focus()}
-      className={styles.editorTextAreaContainer}
-    >
-      <textarea
-        className={styles.editorTextArea}
-        ref={textareaRef}
-        value={query}
-        onChange={handleTextFieldChange}
-      />
-      <SyntaxHighlighter
-        language="graphql"
-        style={coldarkDark}
-        customStyle={{
-          flex: '1',
-          background: 'transparent',
-        }}
-      >
-        {query}
-      </SyntaxHighlighter>
-    </div>
-  )
-}
-
-// const Results = () => {
-//   const data = useAppSelector(selectEditorData)
-
-//   return (
-//     <>
-//       {data &&
-//         Object.keys(data)?.map((k) => {
-//           const results = (data?.[k] as unknown as { results: Array<{ name: string }> })?.results
-
-//           if (results?.length) {
-//             return results.map((r) => {
-//               const { name } = r
-
-//               return <p key={name}>{name}</p>
-//             })
-//           }
-//           return <></>
-//         })}
-//     </>
-//   )
-// }
-
-const Results = () => {
-  const data = useAppSelector(selectEditorData)
-
-  return (
-    <>
-      {data && (
-        <SyntaxHighlighter
-          language="graphql"
-          style={coldarkDark}
-          customStyle={{
-            flex: '1',
-            background: 'transparent',
-          }}
-        >
-          {JSON.stringify(data, null, 2)}
-        </SyntaxHighlighter>
-      )}
-    </>
-  )
-}
+import QueryField from '@/components/QueryField'
+import ResponseResult from '@/components/ResponseResult'
 
 export default function EditorPage() {
   const router = useRouter()
@@ -144,9 +50,9 @@ export default function EditorPage() {
             <Wrapper>
               <div className={styles.container}>
                 <div className={styles.docs}>
-                  <button className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
+                  <div className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
                     {t('docs')}
-                  </button>
+                  </div>
                   {isDocsOpen && (
                     <div className={classNames(styles.section, styles.docsSection)}>
                       Documentation
@@ -182,7 +88,7 @@ export default function EditorPage() {
                 </div>
                 <div className={styles.block}>
                   <div className={styles.section}>
-                    <Results />
+                    <ResponseResult />
                   </div>
                 </div>
               </div>

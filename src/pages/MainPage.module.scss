@@ -17,6 +17,16 @@
   h1 {
     @include font-style($size: 35px, $weight: 800);
   }
+
+  @include maxQ(medium) {
+    h1 {
+      font-size: 25px;
+    }
+  }
+
+  @include maxQ(small) {
+    @include grid($columns: 1, $rows: 2);
+  }
 }
 
 .welcomeInfo {
@@ -25,21 +35,46 @@
   gap: 20px;
 }
 
+.codeExample,
+.codeContainer {
+  display: flex;
+  gap: 5px;
+}
+
 .codeExample {
-  @include grid($rows: 2, $col-size: auto, $gap: 10px);
   @include glass-effect();
   @include animation-slide($name: slide-up, $start: 100px);
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 10px;
   border: 1px solid $c-white-transparent;
   border-radius: $b-radius;
-  justify-self: center;
 }
 
 .codeTitle {
-  grid-area: 1 / 1 / 1 / span 2;
   font-size: 20px;
   justify-self: center;
+  @include maxQ(small) {
+    font-size: $font-size-base;
+  }
+}
+
+.codeContainer {
+  @include maxQ(medium) {
+    font-size: $font-size-small;
+  }
+  @media (max-width: 880px) {
+    flex-direction: column;
+  }
+  @include maxQ(small) {
+    flex-direction: row;
+  }
+  @media (max-width: 510px) {
+    pre {
+      width: 250px;
+    }
+    flex-direction: column;
+  }
 }
 
 .navBtn {

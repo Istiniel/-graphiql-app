@@ -2,8 +2,8 @@ import styles from './MainPage.module.scss'
 import Link from 'next/link'
 import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import coldarkDark from 'react-syntax-highlighter/dist/cjs/styles/prism/coldark-dark'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Wrapper from '@/components/Wrapper'
@@ -22,12 +22,6 @@ const query = `query Library {
 const response = `{
   "data": {
     "books": [
-      {
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
-        "genre": "Fiction",
-        "publishedYear": 1960
-      },
       {
         "title": "1984",
         "author": "George Orwell",
@@ -61,12 +55,14 @@ const WelcomePage: NextPage<WelcomePageProps> = () => {
                 </div>
                 <div className={styles.codeExample}>
                   <span className={styles.codeTitle}>{t('codeExample')}</span>
-                  <SyntaxHighlighter language="graphql" style={coldarkDark}>
-                    {query}
-                  </SyntaxHighlighter>
-                  <SyntaxHighlighter language="graphql" style={coldarkDark}>
-                    {response}
-                  </SyntaxHighlighter>
+                  <div className={styles.codeContainer}>
+                    <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                      {query}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                      {response}
+                    </SyntaxHighlighter>
+                  </div>
                 </div>
               </div>
             </Wrapper>

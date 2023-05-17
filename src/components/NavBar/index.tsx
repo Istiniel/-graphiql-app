@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import styles from './NavBar.module.scss'
 import LocaleSelect from '../LocaleSelect'
@@ -15,6 +15,7 @@ import classNames from 'classnames'
 const NavBar = () => {
   const dispatch = useAppDispatch()
   const { user, isLoading } = useAuth()
+  const [isOpen, setIsOpen] = useState(false)
 
   const { t } = useTranslation('common')
 
@@ -35,38 +36,50 @@ const NavBar = () => {
           </h2>
         </div>
       )}
-      <ul className={styles.navList}>
-        {user && (
-          <li>
-            <Link href="/editor" className={styles.navLink}>
-              {capitalizeWord(t('gotomain'))}
-            </Link>
-          </li>
-        )}
+      <div
+        className={classNames(styles.burgerBtn, isOpen ? styles.open : '')}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span></span>
+      </div>
+      <div
+        className={classNames(styles.overlay, isOpen ? styles.openMenu : '')}
+        onClick={() => setIsOpen(!isOpen)}
+      ></div>
+      <div className={classNames(styles.burgerMenu, isOpen ? styles.openMenu : '')}>
+        <ul className={styles.navList}>
+          {user && (
+            <li>
+              <Link href="/editor" className={styles.navLink}>
+                {capitalizeWord(t('gotomain'))}
+              </Link>
+            </li>
+          )}
 
-        {!user ? (
-          <li>
-            <Link href="/auth" className={styles.navBtn}>
-              {`${t('in')} / ${t('up')}`}
-            </Link>
-          </li>
-        ) : (
-          <li>
-            <Link
-              href="/auth"
-              className={styles.navBtn}
-              onClick={() => {
-                signOut(auth)
-                dispatch(setUser(null))
-              }}
-            >
-              {capitalizeWord(t('out'))}
-            </Link>
-          </li>
-        )}
-      </ul>
-      <div className={styles.languageContainer}>
-        <LocaleSelect />
+          {!user ? (
+            <li>
+              <Link href="/auth" className={styles.navLink}>
+                {`${t('in')} / ${t('up')}`}
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link
+                href="/auth"
+                className={styles.navBtn}
+                onClick={() => {
+                  signOut(auth)
+                  dispatch(setUser(null))
+                }}
+              >
+                {capitalizeWord(t('out'))}
+              </Link>
+            </li>
+          )}
+        </ul>
+        <div className={styles.languageContainer}>
+          <LocaleSelect />
+        </div>
       </div>
     </nav>
   )
