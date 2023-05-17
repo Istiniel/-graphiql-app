@@ -31,8 +31,8 @@ export default function EditorPage() {
 
     if (query === null || typeof query !== 'string') return
 
-    dispatch(getGqlValueThunk(query))
-  }, [dispatch, query])
+    dispatch(getGqlValueThunk())
+  }, [dispatch])
 
   useEffect(() => {
     //TODO correct redirection

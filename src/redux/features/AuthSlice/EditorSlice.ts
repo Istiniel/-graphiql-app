@@ -28,7 +28,8 @@ const initialState: EditorState = {
   data: {},
 }
 
-export const getGqlValueThunk = createAsyncThunk('editor/getGqlQuery', async (query: string) => {
+export const getGqlValueThunk = createAsyncThunk('editor/getGqlQuery', async (_, api) => {
+  const { query } = (api.getState() as RootState).editorSlice
   const response = await client.query({
     query: gql`
       ${query}
