@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './EditorPage.module.scss'
 import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
@@ -28,6 +29,14 @@ export default function EditorPage() {
     dispatch(getGqlValueThunk())
   }, [dispatch])
 
+  const handleToggleDocs = useCallback(() => {
+    setIsDocsOpen((prevState) => !prevState)
+  }, [])
+
+  const handleToggleVarsHeaders = useCallback(() => {
+    setIsSelected((prevState) => !prevState)
+  }, [])
+
   useEffect(() => {
     //TODO correct redirection
     if (!user) {
@@ -39,57 +48,55 @@ export default function EditorPage() {
     <>
       <Meta title="Editor" description="GraphQL editor" />
       <Layout>
-        <main className={`${styles.main}`}>
-          {user && (
-            <Wrapper>
-              <div className={styles.container}>
-                <div className={styles.docs}>
-                  <div className={styles.docsBtn} onClick={() => setIsDocsOpen(!isDocsOpen)}>
-                    {t('docs')}
-                  </div>
-                  {isDocsOpen && (
-                    <div className={classNames(styles.section, styles.docsSection)}>
-                      Documentation
-                    </div>
-                  )}
+        <main className={styles.main}>
+          <Wrapper>
+            <div className={styles.container}>
+              <div className={styles.docs}>
+                <div className={styles.docsBtn} onClick={handleToggleDocs}>
+                  {t('docs')}
                 </div>
-                <div className={styles.block}>
-                  <div className={styles.section}>
-                    <QueryField fieldType="query" />
+                {isDocsOpen && (
+                  <div className={classNames(styles.section, styles.docsSection)}>
+                    Documentation
                   </div>
-                  <div className={classNames(styles.section, styles.headersSection)}>
-                    <div className={styles.btnSection}>
-                      <SwitchButton
-                        onClickHandler={() => setIsSelected(!isSelected)}
-                        isSelected={isSelected}
-                        primaryText={t('variables')}
-                      />
-                      <SwitchButton
-                        onClickHandler={() => setIsSelected(!isSelected)}
-                        isSelected={!isSelected}
-                        primaryText={t('headers')}
-                      />
-                    </div>
-                    <div className={styles.optionsEditor}>
-                      {isSelected ? (
-                        <QueryField fieldType="headers" />
-                      ) : (
-                        <QueryField fieldType="variables" />
-                      )}
-                    </div>
+                )}
+              </div>
+              <div className={styles.block}>
+                <div className={styles.section}>
+                  <QueryField fieldType="query" />
+                </div>
+                <div className={classNames(styles.section, styles.headersSection)}>
+                  <div className={styles.btnSection}>
+                    <SwitchButton
+                      onClickHandler={handleToggleVarsHeaders}
+                      isSelected={isSelected}
+                      primaryText={t('variables')}
+                    />
+                    <SwitchButton
+                      onClickHandler={handleToggleVarsHeaders}
+                      isSelected={!isSelected}
+                      primaryText={t('headers')}
+                    />
                   </div>
-                </div>
-                <div className={styles.btnBlock}>
-                  <StartButton onClickHandler={handleStartClick} />
-                </div>
-                <div className={styles.block}>
-                  <div className={styles.section}>
-                    <ResponseResult />
+                  <div className={styles.optionsEditor}>
+                    {isSelected ? (
+                      <QueryField fieldType="headers" />
+                    ) : (
+                      <QueryField fieldType="variables" />
+                    )}
                   </div>
                 </div>
               </div>
-            </Wrapper>
-          )}
+              <div className={styles.btnBlock}>
+                <StartButton onClickHandler={handleStartClick} />
+              </div>
+              <div className={styles.block}>
+                <div className={styles.section}>
+                  <ResponseResult />
+                </div>
+              </div>
+            </div>
+          </Wrapper>
         </main>
       </Layout>
     </>

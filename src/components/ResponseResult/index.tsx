@@ -4,7 +4,7 @@ import { useAppSelector } from '@/redux/hooks'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
-const Results = () => {
+const ResponseResult = () => {
   const data = useAppSelector(selectEditorData)
 
   return (
@@ -28,4 +28,4 @@ const Results = () => {
   )
 }
 
-export default Results
+export default ResponseResult

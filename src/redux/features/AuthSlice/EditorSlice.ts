@@ -62,7 +62,6 @@ export const getGqlValueThunk = createAsyncThunk('editor/getGqlQuery', async (_,
     query: gql`
       ${query}
     `,
-
     variables: JSON.parse(variables),
     context: {
       headers: JSON.parse(headers),
