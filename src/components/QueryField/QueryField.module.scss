@@ -70,9 +70,14 @@
 }
 
 .editorTextAreaContainer {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   background-color: #282a36;
+  overflow: hidden;
 }
 
 .editorTextArea {
@@ -81,12 +86,17 @@
   right: 0;
   bottom: 0;
   left: 0;
+  @include font(1.5rem, 150%, 400);
 
-  resize: none;
+  margin: 0.75rem 0;
+  padding: 1.5rem;
+
   background-color: transparent;
-  padding: 0.5rem;
-  font-family: 'Roboto Mono', monospace;
-  color: transparent;
+  color: rgb(255, 255, 255);
   caret-color: white;
   outline: none;
+  resize: none;
+
+  //disable to debug
+  // color: transparent;
 }

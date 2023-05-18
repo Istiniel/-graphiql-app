@@ -1,14 +1,24 @@
 import styles from './QueryField.module.scss'
-import { useCallback, useRef } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { useAppSelector } from '@/redux/hooks'
 import { useDispatch } from 'react-redux'
-import { selectQuery, setQuery } from '@/redux/features/AuthSlice/EditorSlice'
+import { setHeaders, setQuery, setVariables } from '@/redux/features/AuthSlice/EditorSlice'
+import { RootState } from '../../redux/store'
 
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+// import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
-const QueryField = () => {
-  const query = useAppSelector(selectQuery)
+const QueryField: React.FC<{ fieldType: 'query' | 'variables' | 'headers' }> = ({ fieldType }) => {
+  const actions = useMemo(
+    () => ({
+      query: setQuery,
+      variables: setVariables,
+      headers: setHeaders,
+    }),
+    [],
+  )
+
+  const query = useAppSelector((state: RootState) => state.editorSlice[fieldType])
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const dispatch = useDispatch()
@@ -16,10 +26,9 @@ const QueryField = () => {
   const handleTextFieldChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const query = e.target.value
-
-      dispatch(setQuery(query))
+      dispatch(actions[fieldType](query))
     },
-    [dispatch],
+    [dispatch, actions, fieldType],
   )
 
   return (
@@ -30,22 +39,26 @@ const QueryField = () => {
       onClick={() => textareaRef.current?.focus()}
       className={styles.editorTextAreaContainer}
     >
+      {/* <SyntaxHighlighter
+        language="graphql"
+        lineProps={{ style: { paddingBottom: 8 } }}
+        wrapLines={true}
+        customStyle={{
+          fontSize: '15px',
+          flex: '1',
+          background: 'transparent',
+        }}
+        style={coldarkDark}
+      >
+        {query}
+      </SyntaxHighlighter> */}
       <textarea
         className={styles.editorTextArea}
         ref={textareaRef}
         value={query}
         onChange={handleTextFieldChange}
+        data-scrolly={textareaRef.current?.scrollTop || 0}
       />
-      <SyntaxHighlighter
-        language="graphql"
-        style={coldarkDark}
-        customStyle={{
-          flex: '1',
-          background: 'transparent',
-        }}
-      >
-        {query}
-      </SyntaxHighlighter>
     </div>
   )
 }

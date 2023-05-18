@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { StartButton, SwitchButton } from '@/UI/EditorButtons'
 import { useDispatch } from 'react-redux'
-import { getGqlValueThunk, selectQuery } from '@/redux/features/AuthSlice/EditorSlice'
+import { getGqlValueThunk } from '@/redux/features/AuthSlice/EditorSlice'
 import { AppDispatch } from '@/redux/store'
 import QueryField from '@/components/QueryField'
 import ResponseResult from '@/components/ResponseResult'
@@ -19,18 +19,12 @@ import ResponseResult from '@/components/ResponseResult'
 export default function EditorPage() {
   const router = useRouter()
   const user = useAppSelector(selectUser)
-  const query = useAppSelector(selectQuery)
   const { t } = useTranslation('editor')
   const [isSelected, setIsSelected] = useState(false)
-  const [isStart, setIsStart] = useState(true)
   const [isDocsOpen, setIsDocsOpen] = useState(false)
   const dispatch = useDispatch<AppDispatch>()
 
   const handleStartClick = useCallback(() => {
-    setIsStart((prev) => !prev)
-
-    if (query === null || typeof query !== 'string') return
-
     dispatch(getGqlValueThunk())
   }, [dispatch])
 
@@ -61,7 +55,7 @@ export default function EditorPage() {
                 </div>
                 <div className={styles.block}>
                   <div className={styles.section}>
-                    <QueryField />
+                    <QueryField fieldType="query" />
                   </div>
                   <div className={classNames(styles.section, styles.headersSection)}>
                     <div className={styles.btnSection}>
@@ -76,15 +70,17 @@ export default function EditorPage() {
                         primaryText={t('headers')}
                       />
                     </div>
-                    {isSelected ? (
-                      <div className={styles.headers}>{t('headers')}</div>
-                    ) : (
-                      <div className={styles.variables}>{t('variables')}</div>
-                    )}
+                    <div className={styles.optionsEditor}>
+                      {isSelected ? (
+                        <QueryField fieldType="headers" />
+                      ) : (
+                        <QueryField fieldType="variables" />
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className={styles.btnBlock}>
-                  <StartButton onClickHandler={handleStartClick} isStart={isStart} />
+                  <StartButton onClickHandler={handleStartClick} />
                 </div>
                 <div className={styles.block}>
                   <div className={styles.section}>
