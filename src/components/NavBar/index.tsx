@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import styles from './NavBar.module.scss'
 import LocaleSelect from '../LocaleSelect'
@@ -16,6 +16,15 @@ const NavBar = () => {
   const dispatch = useAppDispatch()
   const { user, isLoading } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleOpenBurger = useCallback(() => {
+    setIsOpen((prevState) => !prevState)
+  }, [])
+
+  const handleSignOut = useCallback(() => {
+    signOut(auth)
+    dispatch(setUser(null))
+  }, [dispatch])
 
   const { t } = useTranslation('common')
 
@@ -38,13 +47,13 @@ const NavBar = () => {
       )}
       <div
         className={classNames(styles.burgerBtn, isOpen ? styles.open : '')}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleOpenBurger}
       >
         <span></span>
       </div>
       <div
         className={classNames(styles.overlay, isOpen ? styles.openMenu : '')}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleOpenBurger}
       ></div>
       <div className={classNames(styles.burgerMenu, isOpen ? styles.openMenu : '')}>
         <ul className={styles.navList}>
@@ -64,14 +73,7 @@ const NavBar = () => {
             </li>
           ) : (
             <li>
-              <Link
-                href="/auth"
-                className={styles.navBtn}
-                onClick={() => {
-                  signOut(auth)
-                  dispatch(setUser(null))
-                }}
-              >
+              <Link href="/auth" className={styles.navBtn} onClick={handleSignOut}>
                 {capitalizeWord(t('out'))}
               </Link>
             </li>
