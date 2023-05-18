@@ -1,6 +1,7 @@
 import NavBar from '@/components/NavBar'
 import React, { useEffect, useState } from 'react'
 import styles from './Header.module.scss'
+import classNames from 'classnames'
 
 const Header = () => {
   const [sticky, setSticky] = useState(false)
@@ -21,7 +22,7 @@ const Header = () => {
   }, [])
 
   return (
-    <header className={`${styles.header} ${sticky ? styles.sticky : ''}`}>
+    <header className={classNames(styles.header, sticky ? styles.sticky : '')}>
       <div className="wrapper">
         <div className={styles.container}>
           <NavBar />

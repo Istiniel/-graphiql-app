@@ -1,16 +1,13 @@
 import React from 'react'
 import styles from './EditorButtons.module.scss'
+import { useAppSelector } from '@/redux/hooks'
+import { selectStatus } from '@/redux/features/AuthSlice/EditorSlice'
 
 interface ISwitchButton {
-  onClickHandler?: () => void
+  onClickHandler?: VoidFunction
   isSelected: boolean
   primaryText: string
   preamble?: string
-}
-
-interface IStartButton {
-  onClickHandler?: () => void
-  isStart: boolean
 }
 
 export const SwitchButton: React.FC<ISwitchButton & React.HTMLProps<HTMLButtonElement>> = ({
@@ -32,14 +29,18 @@ export const SwitchButton: React.FC<ISwitchButton & React.HTMLProps<HTMLButtonEl
   )
 }
 
+interface IStartButton {
+  onClickHandler?: VoidFunction
+}
+
 export const StartButton: React.FC<IStartButton & React.HTMLProps<HTMLButtonElement>> = ({
   onClickHandler,
-  isStart,
 }) => {
+  const status = useAppSelector(selectStatus)
   return (
     <button
       onClick={onClickHandler}
-      className={isStart ? styles.btnStart : styles.btnStop}
+      className={status === 'idle' ? styles.btnStart : styles.btnStop}
     ></button>
   )
 }

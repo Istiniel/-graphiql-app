@@ -1,4 +1,5 @@
 @use './variables' as *;
+@use './mediaquerys' as *;
 
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
@@ -52,6 +53,10 @@
     cursor: not-allowed;
     pointer-events: none;
     user-select: none;
+  }
+
+  @include maxQ(small) {
+    font-size: $font-size-base;
   }
 }
 
@@ -131,6 +136,7 @@
 @mixin glass-effect($color: $c-dark-transparent, $blur: 14px) {
   background-color: $color;
   backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
 }
 
 @mixin animation-slide($name: slide-down, $start: -100px, $end: 0) {
