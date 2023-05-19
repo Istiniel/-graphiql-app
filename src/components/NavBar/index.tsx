@@ -11,11 +11,18 @@ import useAuth from '@/hooks/useAuth'
 import { useAppDispatch } from '@/redux/hooks'
 import { setUser } from '@/redux/features/AuthSlice/AuthSlice'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
   const { user, isLoading } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
+
+  const router = useRouter()
+
+  const isEditorPage = useCallback(() => {
+    return router.asPath.includes('editor')
+  }, [router])
 
   const handleOpenBurger = useCallback(() => {
     setIsOpen((prevState) => !prevState)
@@ -57,7 +64,7 @@ const NavBar = () => {
       ></div>
       <div className={classNames(styles.burgerMenu, isOpen ? styles.openMenu : '')}>
         <ul className={styles.navList}>
-          {user && (
+          {user && !isEditorPage() && (
             <li>
               <Link href="/editor" className={styles.navLink}>
                 {capitalizeWord(t('gotomain'))}
