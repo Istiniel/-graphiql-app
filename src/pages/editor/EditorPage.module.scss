@@ -49,26 +49,31 @@
 }
 
 .docs {
+  @include font-style($color: $c-black);
   display: flex;
   align-items: center;
-  z-index: 5;
+  z-index: 6;
   position: absolute;
   right: -40px;
   top: 0;
   height: 100%;
+  max-width: 100%;
   @include maxQ(small) {
     right: -10px;
   }
 }
 
 .docsSection {
+  max-width: 500px;
   height: 100%;
-  background-color: $c-gray;
+  background-color: $c-white;
   border-radius: 5px 0 0 5px;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .docsBtn {
-  @include button-style();
+  @include button-style($bg-color: $c-white);
   @include font-style($color: $c-black, $size: 14px);
   border-radius: 5px 0 0 5px;
   writing-mode: vertical-rl;
