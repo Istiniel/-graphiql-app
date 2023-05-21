@@ -16,6 +16,13 @@ import { getGqlValueThunk } from '@/redux/features/AuthSlice/EditorSlice'
 import { AppDispatch } from '@/redux/store'
 import QueryField from '@/components/QueryField'
 import ResponseResult from '@/components/ResponseResult'
+import Spinner from '@/UI/Spinner'
+import dynamic from 'next/dynamic'
+// import Schema from '@/components/Schema'
+
+const Schema = dynamic(() => import('@/components/Schema'), {
+  loading: () => <Spinner />,
+})
 
 export default function EditorPage() {
   const router = useRouter()
@@ -57,7 +64,7 @@ export default function EditorPage() {
                 </div>
                 {isDocsOpen && (
                   <div className={classNames(styles.section, styles.docsSection)}>
-                    Documentation
+                    <Schema />
                   </div>
                 )}
               </div>
