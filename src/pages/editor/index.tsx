@@ -18,6 +18,9 @@ import QueryField from '@/components/QueryField'
 import ResponseResult from '@/components/ResponseResult'
 import Spinner from '@/UI/Spinner'
 import dynamic from 'next/dynamic'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '@/components/ErrorFallback/ErrorFallback'
+
 // import Schema from '@/components/Schema'
 
 const Schema = dynamic(() => import('@/components/Schema'), {
@@ -64,13 +67,17 @@ export default function EditorPage() {
                 </div>
                 {isDocsOpen && (
                   <div className={classNames(styles.section, styles.docsSection)}>
-                    <Schema />
+                    <ErrorBoundary FallbackComponent={ErrorFallback}>
+                      <Schema />
+                    </ErrorBoundary>
                   </div>
                 )}
               </div>
               <div className={styles.block}>
                 <div className={styles.section}>
-                  <QueryField fieldType="query" />
+                  <ErrorBoundary FallbackComponent={ErrorFallback}>
+                    <QueryField fieldType="query" />
+                  </ErrorBoundary>
                 </div>
                 <div className={classNames(styles.section, styles.headersSection)}>
                   <div className={styles.btnSection}>
@@ -87,9 +94,13 @@ export default function EditorPage() {
                   </div>
                   <div className={styles.optionsEditor}>
                     {isSelected ? (
-                      <QueryField fieldType="headers" />
+                      <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <QueryField fieldType="headers" />
+                      </ErrorBoundary>
                     ) : (
-                      <QueryField fieldType="variables" />
+                      <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <QueryField fieldType="variables" />
+                      </ErrorBoundary>
                     )}
                   </div>
                 </div>
