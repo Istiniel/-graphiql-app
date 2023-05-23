@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import styles from './NavBar.module.scss'
 import LocaleSelect from '../LocaleSelect'
@@ -20,7 +20,7 @@ const NavBar = () => {
 
   const router = useRouter()
 
-  const isEditorPage = useCallback(() => {
+  const isEditorPage = useMemo(() => {
     return router.asPath.includes('editor')
   }, [router])
 
@@ -64,7 +64,7 @@ const NavBar = () => {
       ></div>
       <div className={classNames(styles.burgerMenu, isOpen ? styles.openMenu : '')}>
         <ul className={styles.navList}>
-          {user && !isEditorPage() && (
+          {user && !isEditorPage && (
             <li>
               <Link href="/editor" className={styles.navLink}>
                 {capitalizeWord(t('gotomain'))}

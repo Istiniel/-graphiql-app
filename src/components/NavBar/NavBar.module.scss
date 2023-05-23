@@ -60,12 +60,12 @@
 
 .loading {
   opacity: 0;
-  transition: opacity ease-out 0.3s;
+  transition: opacity ease-out 1s;
 }
 
 .loaded {
   opacity: 1;
-  transition: opacity ease-out 0.3s;
+  transition: opacity ease-out 1s;
   display: flex;
   align-items: center;
 }

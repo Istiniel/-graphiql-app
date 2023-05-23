@@ -16,6 +16,7 @@ import { getGqlValueThunk } from '@/redux/features/AuthSlice/EditorSlice'
 import { AppDispatch } from '@/redux/store'
 import QueryField from '@/components/QueryField'
 import ResponseResult from '@/components/ResponseResult'
+import Spinner from '@/UI/Spinner'
 
 export default function EditorPage() {
   const router = useRouter()
@@ -51,50 +52,55 @@ export default function EditorPage() {
         <main className={styles.main}>
           <Wrapper>
             <div className={styles.container}>
-              <div className={styles.docs}>
-                <div className={styles.docsBtn} onClick={handleToggleDocs}>
-                  {t('docs')}
-                </div>
-                {isDocsOpen && (
-                  <div className={classNames(styles.section, styles.docsSection)}>
-                    Documentation
-                  </div>
-                )}
-              </div>
-              <div className={styles.block}>
-                <div className={styles.section}>
-                  <QueryField fieldType="query" />
-                </div>
-                <div className={classNames(styles.section, styles.headersSection)}>
-                  <div className={styles.btnSection}>
-                    <SwitchButton
-                      onClickHandler={handleToggleVarsHeaders}
-                      isSelected={isSelected}
-                      primaryText={t('variables')}
-                    />
-                    <SwitchButton
-                      onClickHandler={handleToggleVarsHeaders}
-                      isSelected={!isSelected}
-                      primaryText={t('headers')}
-                    />
-                  </div>
-                  <div className={styles.optionsEditor}>
-                    {isSelected ? (
-                      <QueryField fieldType="headers" />
-                    ) : (
-                      <QueryField fieldType="variables" />
+              {!user && <Spinner />}
+              {user && (
+                <>
+                  <div className={styles.docs}>
+                    <div className={styles.docsBtn} onClick={handleToggleDocs}>
+                      {t('docs')}
+                    </div>
+                    {isDocsOpen && (
+                      <div className={classNames(styles.section, styles.docsSection)}>
+                        Documentation
+                      </div>
                     )}
                   </div>
-                </div>
-              </div>
-              <div className={styles.btnBlock}>
-                <StartButton onClickHandler={handleStartClick} />
-              </div>
-              <div className={styles.block}>
-                <div className={styles.section}>
-                  <ResponseResult />
-                </div>
-              </div>
+                  <div className={styles.block}>
+                    <div className={styles.section}>
+                      <QueryField fieldType="query" />
+                    </div>
+                    <div className={classNames(styles.section, styles.headersSection)}>
+                      <div className={styles.btnSection}>
+                        <SwitchButton
+                          onClickHandler={handleToggleVarsHeaders}
+                          isSelected={isSelected}
+                          primaryText={t('variables')}
+                        />
+                        <SwitchButton
+                          onClickHandler={handleToggleVarsHeaders}
+                          isSelected={!isSelected}
+                          primaryText={t('headers')}
+                        />
+                      </div>
+                      <div className={styles.optionsEditor}>
+                        {isSelected ? (
+                          <QueryField fieldType="headers" />
+                        ) : (
+                          <QueryField fieldType="variables" />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.btnBlock}>
+                    <StartButton onClickHandler={handleStartClick} />
+                  </div>
+                  <div className={styles.block}>
+                    <div className={styles.section}>
+                      <ResponseResult />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </Wrapper>
         </main>

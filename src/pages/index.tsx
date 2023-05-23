@@ -32,10 +32,8 @@ const response = `{
   }
 }
 `
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface WelcomePageProps {}
 
-const WelcomePage: NextPage<WelcomePageProps> = () => {
+const WelcomePage: NextPage = () => {
   const { t } = useTranslation('common')
 
   return (
@@ -75,7 +73,7 @@ const WelcomePage: NextPage<WelcomePageProps> = () => {
 
 export default WelcomePage
 
-export const getStaticProps: GetStaticProps<WelcomePageProps> = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const user = auth.currentUser
 
   return {
