@@ -7,14 +7,11 @@ import Wrapper from '@/components/Wrapper'
 import { GetStaticProps, NextPage } from 'next'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useAppSelector } from '@/redux/hooks'
-import { selectUser } from '@/redux/features/AuthSlice/AuthSlice'
+import Spinner from '../../UI/Spinner'
+import useAuth from '@/hooks/useAuth'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface AuthPageProps {}
-
-const AuthPage: NextPage<AuthPageProps> = () => {
-  const user = useAppSelector(selectUser)
+const AuthPage: NextPage = () => {
+  const { user, isLoading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -31,7 +28,8 @@ const AuthPage: NextPage<AuthPageProps> = () => {
           <section className={styles.authSection}>
             <Wrapper>
               <div className={styles.container}>
-                <AuthForm />
+                {(user || isLoading) && <Spinner />}
+                {!user && !isLoading && <AuthForm />}
               </div>
             </Wrapper>
           </section>
@@ -43,7 +41,7 @@ const AuthPage: NextPage<AuthPageProps> = () => {
 
 export default AuthPage
 
-export const getStaticProps: GetStaticProps<AuthPageProps> = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       ...(await serverSideTranslations(context.locale as string, ['auth', 'common'])),

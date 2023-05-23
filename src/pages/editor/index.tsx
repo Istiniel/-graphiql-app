@@ -5,8 +5,6 @@ import Layout from '@/components/Layout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Wrapper from '@/components/Wrapper'
-import { useAppSelector } from '@/redux/hooks'
-import { selectUser } from '@/redux/features/AuthSlice/AuthSlice'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import classNames from 'classnames'
@@ -18,15 +16,15 @@ import QueryField from '@/components/QueryField'
 import ResponseResult from '@/components/ResponseResult'
 import Spinner from '@/UI/Spinner'
 import dynamic from 'next/dynamic'
-// import Schema from '@/components/Schema'
 
 const Schema = dynamic(() => import('@/components/Schema'), {
   loading: () => <Spinner />,
 })
+import useAuth from '@/hooks/useAuth'
 
 export default function EditorPage() {
   const router = useRouter()
-  const user = useAppSelector(selectUser)
+  const { user, isLoading } = useAuth()
   const { t } = useTranslation('editor')
   const [isSelected, setIsSelected] = useState(false)
   const [isDocsOpen, setIsDocsOpen] = useState(false)
@@ -45,11 +43,10 @@ export default function EditorPage() {
   }, [])
 
   useEffect(() => {
-    //TODO correct redirection
-    if (!user) {
+    if (!user && !isLoading) {
       router.push('/')
     }
-  }, [user, router])
+  }, [user, router, isLoading])
 
   return (
     <>
