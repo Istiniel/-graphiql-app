@@ -24,6 +24,12 @@ const Schema = () => {
   )
 
   useEffect(() => {
+    if (docTreeStore) {
+      setDocTree(docTreeStore)
+    }
+  }, [docTreeStore])
+
+  useEffect(() => {
     dispatch(getGqlDocsThunk())
   }, [dispatch])
 
