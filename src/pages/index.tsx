@@ -57,7 +57,7 @@ const WelcomePage: NextPage = () => {
                     <SyntaxHighlighter language="graphql" style={coldarkDark}>
                       {query}
                     </SyntaxHighlighter>
-                    <SyntaxHighlighter language="graphql" style={coldarkDark}>
+                    <SyntaxHighlighter language="json" style={coldarkDark}>
                       {response}
                     </SyntaxHighlighter>
                   </div>
