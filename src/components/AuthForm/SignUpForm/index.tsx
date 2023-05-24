@@ -54,6 +54,12 @@ const SignInForm = () => {
     formState: { errors, isValid },
   } = useForm<FormUpValues>({
     mode: 'onChange',
+
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmpass: '',
+    },
   })
 
   const password = watch('password')
