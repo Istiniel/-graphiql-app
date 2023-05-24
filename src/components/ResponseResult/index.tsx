@@ -11,7 +11,7 @@ const ResponseResult = () => {
     <>
       {data && (
         <SyntaxHighlighter
-          language="graphql"
+          language="json"
           style={coldarkDark}
           customStyle={{
             fontSize: '15px',
