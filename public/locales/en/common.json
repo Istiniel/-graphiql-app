@@ -12,5 +12,6 @@
   "createdIn": "Created in 2023",
   "codeExample": "Code example:",
   "gotomain": "Go to the main page",
-  "pageNotFound": "Page not found!"
+  "pageNotFound": "Page not found!",
+  "page500": "Server error occured!"
 }
