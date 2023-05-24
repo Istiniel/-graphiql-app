@@ -27,6 +27,12 @@ const QueryField: React.FC<{ fieldType: 'query' | 'variables' | 'headers' }> = (
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const query = e.target.value
       dispatch(actions[fieldType](query))
+
+      const regex = /ERROR/i
+
+      if (regex.test(e.target.value)) {
+        throw new Error(`${Math.round(Math.random() * 1000)}`)
+      }
     },
     [dispatch, actions, fieldType],
   )

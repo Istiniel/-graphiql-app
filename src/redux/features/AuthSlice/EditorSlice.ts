@@ -9,6 +9,9 @@ import { RootState } from '../../store'
 import { HYDRATE } from 'next-redux-wrapper'
 import client from '@/apollo'
 import { gql } from '@apollo/client'
+import { getIntrospectionQuery } from 'graphql'
+import EditorService, { DocsResponse, DocTreeNode } from '@/services/EditorService'
+import ky from 'ky'
 
 const hydrate = createAction<RootState>(HYDRATE)
 
@@ -44,6 +47,7 @@ type EditorState = {
   data: TUnknownObject
   status: 'idle' | 'loading'
   error: null | SerializedError
+  docTree: DocTreeNode | null
 }
 
 const initialState: EditorState = {
@@ -53,6 +57,7 @@ const initialState: EditorState = {
   data: {},
   status: 'idle',
   error: null,
+  docTree: null,
 }
 
 export const getGqlValueThunk = createAsyncThunk('editor/getGqlQuery', async (_, thunkAPI) => {
@@ -69,6 +74,18 @@ export const getGqlValueThunk = createAsyncThunk('editor/getGqlQuery', async (_,
   })
 
   return response.data
+})
+
+export const getGqlDocsThunk = createAsyncThunk('editor/getGqlDocs', async () => {
+  const json: DocsResponse = await ky
+    .post('https://rickandmortyapi.com/graphql', {
+      json: {
+        query: getIntrospectionQuery(),
+      },
+    })
+    .json()
+
+  return EditorService.buildDocTree(json)
 })
 
 export const editorSlice = createSlice({
@@ -99,7 +116,6 @@ export const editorSlice = createSlice({
       })
       .addCase(getGqlValueThunk.fulfilled, (state, action) => {
         state.data = action.payload
-        console.log(action.payload)
         state.status = 'idle'
       })
       .addCase(getGqlValueThunk.rejected, (state, action) => {
@@ -108,6 +124,9 @@ export const editorSlice = createSlice({
           error: action.error.name || 'unknown error',
           message: action.error.message || 'unknown',
         }
+      })
+      .addCase(getGqlDocsThunk.fulfilled, (state, action) => {
+        state.docTree = action.payload
       })
   },
 })
