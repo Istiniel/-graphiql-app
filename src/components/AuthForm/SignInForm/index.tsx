@@ -50,6 +50,10 @@ const SignInForm = () => {
     formState: { errors, isValid },
   } = useForm<FormInValues>({
     mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   })
 
   const { t } = useTranslation('auth')
