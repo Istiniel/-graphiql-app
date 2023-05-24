@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react'
 import Header from './Header'
-import Footer from './Footer'
 
-// import dynamic from 'next/dynamic'
-// const MediaQuery = dynamic(() => import('react-responsive'), {
-//   ssr: false,import NavBar from './../NavBar/index';
-// })
+import Spinner from '@/UI/Spinner'
+import dynamic from 'next/dynamic'
+const DynamicFooter = dynamic(() => import('./Footer'), {
+  loading: () => <Spinner />,
+  ssr: false,
+})
 
 interface LayoutProps {
   children: ReactNode
@@ -14,12 +15,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      {/* <MediaQuery minWidth={1025}>
-        <Header />
-      </MediaQuery> */}
       <Header />
       {children}
-      <Footer />
+      <DynamicFooter />
     </>
   )
 }
