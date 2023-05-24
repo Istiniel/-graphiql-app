@@ -16,7 +16,7 @@ const AuthPage: NextPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.push('/')
+      router.push('/editor')
     }
   }, [user, router])
 

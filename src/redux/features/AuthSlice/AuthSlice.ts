@@ -2,7 +2,7 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
 import { HYDRATE } from 'next-redux-wrapper'
 import { User } from 'firebase/auth'
-import { auth } from '@/firebase/clientApp'
+// import { auth } from '@/firebase/clientApp'
 
 const hydrate = createAction<RootState>(HYDRATE)
 
@@ -11,7 +11,7 @@ type AuthState = {
 }
 
 const initialState: AuthState = {
-  user: auth.currentUser,
+  user: null,
 }
 
 export const authSlice = createSlice({
