@@ -52,6 +52,21 @@ class EditorService {
     return docTree
   }
 
+  static toggleDocTreeExpanded = (
+    docTree: DocTreeNode | null,
+    nodeKey: string,
+  ): DocTreeNode | null => {
+    const copyDocTree = structuredClone(docTree)
+
+    const changedIndex = copyDocTree?.types?.findIndex((typeObj) => typeObj.name === nodeKey)
+
+    if (copyDocTree && copyDocTree.types && typeof changedIndex === 'number' && changedIndex > -1) {
+      copyDocTree.types[changedIndex].expanded = !copyDocTree?.types?.[changedIndex].expanded
+    }
+
+    return copyDocTree
+  }
+
   private static processType = (type: GraphQLNamedType, typeName: string): DocTreeNode => {
     const docNode: DocTreeNode = {
       name: typeName,
