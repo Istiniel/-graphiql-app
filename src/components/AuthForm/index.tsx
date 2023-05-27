@@ -50,7 +50,7 @@ const AuthForm = () => {
                 router.push('/editor')
               })
               .catch((error) => {
-                console.log(error)
+                console.warn(error)
               })
           }
         />

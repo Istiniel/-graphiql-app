@@ -1,93 +1,44 @@
 import {
   createAction,
-  createAsyncThunk,
-  createSlice,
-  current,
-  PayloadAction,
   SerializedError,
+  createSlice,
+  PayloadAction,
+  current,
 } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
 import { HYDRATE } from 'next-redux-wrapper'
-import client from '@/apollo'
-import { gql } from '@apollo/client'
-import { getIntrospectionQuery } from 'graphql'
-import EditorService, { DocsResponse, DocTreeNode } from '@/services/EditorService'
-import ky from 'ky'
+import { getGqlDocsThunk, getGqlValueThunk } from '@/redux/asyncThunks/editorThunks'
+import { DEFAULT_CHARACTERS } from '@/constants/editor'
+import EditorService, { DocTreeNode } from '@/services/EditorService'
 
 const hydrate = createAction<RootState>(HYDRATE)
 
 type TUnknownObject = Record<string, string | number | string | Array<TUnknownObject>> | string
 
-export const CHARACTERS_QUERY = `
-query getCharacters($filter: FilterCharacter) {
-  characters(filter: $filter) {
-    results {
-      name
-      status
-    }
-  }
+enum EditorStatus {
+  IDLE = 'idle',
+  LOADING = 'loading',
 }
-`
-
-export const CHARACTERS_VARS = `{
-  "filter": {
-    "status": "Alive"
-  }
-}
-`
-
-export const CHARACTERS_HEADERS = `{
-  "special": "Special header value"
-}
-`
 
 type EditorState = {
   query: string
   variables: string
   headers: string
   data: TUnknownObject
-  status: 'idle' | 'loading'
+  status: EditorStatus
   error: null | SerializedError
   docTree: DocTreeNode | null
 }
 
 const initialState: EditorState = {
-  query: CHARACTERS_QUERY,
-  variables: CHARACTERS_VARS,
-  headers: CHARACTERS_HEADERS,
+  query: DEFAULT_CHARACTERS.QUERY,
+  variables: DEFAULT_CHARACTERS.VARS,
+  headers: DEFAULT_CHARACTERS.HEADERS,
   data: {},
-  status: 'idle',
+  status: EditorStatus.IDLE,
   error: null,
   docTree: null,
 }
-
-export const getGqlValueThunk = createAsyncThunk('editor/getGqlQuery', async (_, thunkAPI) => {
-  const { query, variables, headers } = (thunkAPI.getState() as RootState).editorSlice
-
-  const response = await client.query({
-    query: gql`
-      ${query}
-    `,
-    variables: JSON.parse(variables),
-    context: {
-      headers: JSON.parse(headers),
-    },
-  })
-
-  return response.data
-})
-
-export const getGqlDocsThunk = createAsyncThunk('editor/getGqlDocs', async () => {
-  const json: DocsResponse = await ky
-    .post('https://rickandmortyapi.com/graphql', {
-      json: {
-        query: getIntrospectionQuery(),
-      },
-    })
-    .json()
-
-  return EditorService.buildDocTree(json)
-})
 
 export const editorSlice = createSlice({
   name: 'editorSlice',
@@ -116,14 +67,14 @@ export const editorSlice = createSlice({
         }
       })
       .addCase(getGqlValueThunk.pending, (state) => {
-        state.status = 'loading'
+        state.status = EditorStatus.LOADING
       })
       .addCase(getGqlValueThunk.fulfilled, (state, action) => {
         state.data = action.payload
-        state.status = 'idle'
+        state.status = EditorStatus.IDLE
       })
       .addCase(getGqlValueThunk.rejected, (state, action) => {
-        state.status = 'idle'
+        state.status = EditorStatus.IDLE
         state.data = {
           error: action.error.name || 'unknown error',
           message: action.error.message || 'unknown',

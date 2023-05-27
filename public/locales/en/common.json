@@ -13,5 +13,7 @@
   "codeExample": "Code example:",
   "gotomain": "Go to the main page",
   "pageNotFound": "Page not found!",
-  "page500": "Server error occured!"
+  "page500": "Server error occurred!",
+  "errorMessage": "An error occurred: ",
+  "retry": "Retry"
 }
