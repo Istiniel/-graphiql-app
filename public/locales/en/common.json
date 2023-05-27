@@ -9,7 +9,7 @@
   "aboutTitle": "Welcome to our GraphQL-powered app!",
   "aboutParagraph": "This app makes it easy to interact with the API and get the data you need. With GraphQL, you can precisely specify what data you want, making your queries more efficient and reducing the amount of data sent over the wire. Try our app now and start building amazing things with GraphQL!",
   "getstarted": "Get started",
-  "createdIn": "Created in 2023",
+  "createdIn": "Created in 2023 ©",
   "codeExample": "Code example:",
   "gotomain": "Go to the main page",
   "pageNotFound": "Page not found!",
