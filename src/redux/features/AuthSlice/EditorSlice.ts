@@ -2,6 +2,7 @@ import {
   createAction,
   createAsyncThunk,
   createSlice,
+  current,
   PayloadAction,
   SerializedError,
 } from '@reduxjs/toolkit'
@@ -101,6 +102,9 @@ export const editorSlice = createSlice({
     setHeaders: (state, action: PayloadAction<string>) => {
       state.headers = action.payload
     },
+    toggleDocTreeExpanded: (state, action: PayloadAction<string>) => {
+      state.docTree = EditorService.toggleDocTreeExpanded(current(state.docTree), action.payload)
+    },
   },
 
   extraReducers: (builder) => {
@@ -131,7 +135,7 @@ export const editorSlice = createSlice({
   },
 })
 
-export const { setQuery, setVariables, setHeaders } = editorSlice.actions
+export const { setQuery, setVariables, setHeaders, toggleDocTreeExpanded } = editorSlice.actions
 export default editorSlice.reducer
 
 export const selectQuery = (state: RootState) => state.editorSlice.query
