@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styles from './ErrorFallback.module.scss'
+import { useTranslation } from 'next-i18next'
 
 interface ErrorFallbackProps {
   error: { message: string }
@@ -7,11 +8,13 @@ interface ErrorFallbackProps {
 }
 
 const ErrorFallback: FC<ErrorFallbackProps> = ({ error, resetErrorBoundary }) => {
+  const { t } = useTranslation('common')
+
   return (
     <div className={styles.errorContainer}>
-      <h3>An error occurred: </h3>
+      <h3>{t('errorMessage')}</h3>
       <p>{error?.message}</p>
-      <button onClick={resetErrorBoundary}>Retry</button>
+      <button onClick={resetErrorBoundary}>{t('retry')}</button>
     </div>
   )
 }

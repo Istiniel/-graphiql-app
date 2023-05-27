@@ -1,10 +1,8 @@
+import { DEFAULT_GRAPH_QL_API } from '@/constants/common'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-//TODO move it to .env ?
-const GQL_API = 'https://rickandmortyapi.com/graphql'
-
 const client = new ApolloClient({
-  uri: GQL_API,
+  uri: process.env.GRAPH_QL_API ?? DEFAULT_GRAPH_QL_API,
   cache: new InMemoryCache(),
 })
 
