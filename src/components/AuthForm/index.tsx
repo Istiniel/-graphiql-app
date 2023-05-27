@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/redux/hooks'
 
 import { auth } from '@/firebase/clientApp'
 import { GithubAuthProvider, signInWithPopup } from 'firebase/auth'
-import { setUser } from '../../redux/features/AuthSlice/AuthSlice'
+import { setUser } from '@/redux/features/AuthSlice/AuthSlice'
 
 const provider = new GithubAuthProvider()
 

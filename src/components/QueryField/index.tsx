@@ -3,10 +3,7 @@ import { useCallback, useMemo, useRef } from 'react'
 import { useAppSelector } from '@/redux/hooks'
 import { useDispatch } from 'react-redux'
 import { setHeaders, setQuery, setVariables } from '@/redux/features/AuthSlice/EditorSlice'
-import { RootState } from '../../redux/store'
-
-// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-// import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { RootState } from '@/redux/store'
 
 const QueryField: React.FC<{ fieldType: 'query' | 'variables' | 'headers' }> = ({ fieldType }) => {
   const actions = useMemo(
@@ -45,19 +42,6 @@ const QueryField: React.FC<{ fieldType: 'query' | 'variables' | 'headers' }> = (
       onClick={() => textareaRef.current?.focus()}
       className={styles.editorTextAreaContainer}
     >
-      {/* <SyntaxHighlighter
-        language="graphql"
-        lineProps={{ style: { paddingBottom: 8 } }}
-        wrapLines={true}
-        customStyle={{
-          fontSize: '15px',
-          flex: '1',
-          background: 'transparent',
-        }}
-        style={coldarkDark}
-      >
-        {query}
-      </SyntaxHighlighter> */}
       <textarea
         className={styles.editorTextArea}
         ref={textareaRef}

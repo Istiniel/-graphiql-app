@@ -1,7 +1,6 @@
 import styles from './Page404.module.scss'
 import Meta from '@/components/Meta'
 import Layout from '@/components/Layout'
-// import { useTranslation } from 'next-i18next'
 import Wrapper from '@/components/Wrapper'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
