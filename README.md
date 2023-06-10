@@ -9,3 +9,5 @@
 ### DEFAULT USER :
 email: testing@gmail.com\
 password: 12345qw!
+
+https://github.com/AnAtoliyAK/graphiql-app/pull/2
